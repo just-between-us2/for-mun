@@ -96,7 +96,7 @@ async function loadMessage() {
 
     const response = await fetch(
       SUPABASE_URL +
-      "/messages?select=message,created_at&order=created_at.desc&limit=1",
+      "/messages?select=message,created_at&order=id.desc&limit=1",
       {
         headers: {
           "apikey": SUPABASE_KEY
