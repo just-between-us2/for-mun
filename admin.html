@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ひみつの編集ページ</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+      background: linear-gradient(160deg, #fff7fa, #ffeaf1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      color: #333;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      background: rgba(255,255,255,.94);
+      border-radius: 28px;
+      padding: 32px 24px;
+      box-shadow: 0 15px 45px rgba(210,120,150,.15);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 25px;
+      margin: 0 0 8px;
+    }
+
+    .sub {
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 15px;
+      margin-bottom: 13px;
+      font-size: 16px;
+      background: #fafafa;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 16px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 600;
+      background: #333;
+      color: white;
+      margin-top: 5px;
+    }
+
+    #logout {
+      background: transparent;
+      color: #999;
+      margin-top: 12px;
+    }
+
+    #editor {
+      display: none;
+    }
+
+    #status {
+      text-align: center;
+      min-height: 22px;
+      margin-top: 15px;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <div id="login">
+    <h1>🔐 ひみつの編集ページ</h1>
+    <div class="sub">ログインした人だけ編集できます</div>
+
+    <input id="email" type="email" placeholder="メールアドレス">
+    <input id="password" type="password" placeholder="パスワード">
+
+    <button onclick="login()">ログイン</button>
+  </div>
+
+
+  <div id="editor">
+    <h1>💌 きみへのメッセージ</h1>
+    <div class="sub">思いついたときに、ここから届ける</div>
+
+    <textarea id="message" placeholder="メッセージを書く..."></textarea>
+
+    <button onclick="sendMessage()">メッセージを更新</button>
+    <button id="logout" onclick="logout()">ログアウト</button>
+  </div>
+
+  <div id="status"></div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL = "https://pwuhcajvuwoumgzcrzcu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_xKz256OVExfMdxs0qajatw_LUtHDFSd";
+
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+async function login() {
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  document.getElementById("status").textContent = "ログイン中…";
+
+  const { error } = await db.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById("status").textContent =
+      "ログインできませんでした";
+    return;
+  }
+
+  showEditor();
+}
+
+
+async function showEditor() {
+
+  document.getElementById("login").style.display = "none";
+  document.getElementById("editor").style.display = "block";
+  document.getElementById("status").textContent = "";
+
+  const { data } = await db
+    .from("messages")
+    .select("message")
+    .order("created_at", { ascending: false })
+    .limit(1);
+
+  if (data && data.length) {
+    document.getElementById("message").value = data[0].message;
+  }
+}
+
+
+async function sendMessage() {
+
+  const message =
+    document.getElementById("message").value.trim();
+
+  if (!message) {
+    document.getElementById("status").textContent =
+      "メッセージを書いてね";
+    return;
+  }
+
+  document.getElementById("status").textContent =
+    "届けています… 💌";
+
+  const { error } = await db
+    .from("messages")
+    .insert({
+      message: message
+    });
+
+  if (error) {
+    document.getElementById("status").textContent =
+      "更新に失敗しました";
+    console.error(error);
+    return;
+  }
+
+  document.getElementById("status").textContent =
+    "届けました 💌";
+}
+
+
+async function logout() {
+
+  await db.auth.signOut();
+
+  document.getElementById("editor").style.display = "none";
+  document.getElementById("login").style.display = "block";
+  document.getElementById("status").textContent = "";
+}
+
+
+async function checkLogin() {
+
+  const { data } = await db.auth.getSession();
+
+  if (data.session) {
+    showEditor();
+  }
+}
+
+checkLogin();
+
+</script>
+
+</body>
+</html>
