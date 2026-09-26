@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>きみへ 💌</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+                   "Noto Sans JP", sans-serif;
+      background:
+        radial-gradient(circle at top left, #fff0f5, transparent 45%),
+        linear-gradient(160deg, #fffafa, #ffeef4);
+      color: #333;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 28px;
+      padding: 38px 25px;
+      text-align: center;
+      box-shadow: 0 15px 45px rgba(180, 100, 130, 0.15);
+    }
+
+    .heart {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 28px;
+      font-weight: 600;
+    }
+
+    #message {
+      font-size: 21px;
+      line-height: 1.9;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    #date {
+      margin-top: 28px;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .loading {
+      color: #aaa;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <div class="heart">💌</div>
+
+    <h1>きみへ</h1>
+
+    <div id="message" class="loading">
+      メッセージを読み込んでいます…
+    </div>
+
+    <div id="date"></div>
+
+  </div>
+
+<script>
+
+const SUPABASE_URL =
+  "https://pwuhcajvuwoumgzcrzcu.supabase.co/rest/v1";
+
+const SUPABASE_KEY =
+  "sb_publishable_xKz256OVExfMdxs0qajatw_LUtHDFSd";
+
+async function loadMessage() {
+
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL +
+      "/messages?select=message,created_at&order=created_at.desc&limit=1",
+      {
+        headers: {
+          "apikey": SUPABASE_KEY
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("読み込みに失敗しました");
+    }
+
+    const data = await response.json();
+
+    if (data.length === 0) {
+      document.getElementById("message").textContent =
+        "まだメッセージはありません 💭";
+      return;
+    }
+
+    document.getElementById("message").classList.remove("loading");
+
+    document.getElementById("message").textContent =
+      data[0].message;
+
+    const date = new Date(data[0].created_at);
+
+    document.getElementById("date").textContent =
+      date.toLocaleString("ja-JP", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+  } catch (error) {
+
+    document.getElementById("message").textContent =
+      "メッセージを読み込めませんでした 🥲";
+
+  }
+
+}
+
+loadMessage();
+
+</script>
+
+</body>
+</html>
