@@ -24,17 +24,25 @@
         linear-gradient(160deg, #fffafa, #ffeef4);
       color: #333;
     }
-    body::before {
-  content: "✦　·　✧　　　　⋆　　　✦　　·　　　　✧";
+body::before {
+  content: "✦";
   position: fixed;
-  inset: 0;
+  top: 10%;
+  left: 7%;
+  color: rgba(170, 160, 215, 0.32);
+  font-size: 14px;
   pointer-events: none;
-  color: rgba(170, 160, 215, 0.38);
-  font-size: 18px;
-  letter-spacing: 10px;
-  line-height: 8;
-  padding: 35px 20px;
   z-index: 0;
+
+  text-shadow:
+    75px 95px 0 rgba(170,160,215,0.22),
+    165px 25px 0 rgba(170,160,215,0.30),
+    270px 125px 0 rgba(170,160,215,0.20),
+    35px 280px 0 rgba(170,160,215,0.25),
+    145px 360px 0 rgba(170,160,215,0.18),
+    300px 300px 0 rgba(170,160,215,0.25),
+    80px 520px 0 rgba(170,160,215,0.18),
+    250px 600px 0 rgba(170,160,215,0.22);
 }
   
 
