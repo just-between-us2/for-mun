@@ -24,6 +24,35 @@
         linear-gradient(160deg, #fffafa, #ffeef4);
       color: #333;
     }
+    body::before {
+  content: "✦　·　✧　　　　⋆　　　✦　　·　　　　✧";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  color: rgba(170, 160, 215, 0.38);
+  font-size: 18px;
+  letter-spacing: 10px;
+  line-height: 8;
+  padding: 35px 20px;
+  z-index: 0;
+}
+  
+
+.card {
+  position: relative;
+  z-index: 1;
+}
+    body::after {
+  content: "☾";
+  position: fixed;
+  top: 11%;
+  right: 10%;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 42px;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  z-index: 0;
+}
 
     .card {
       width: 100%;
@@ -70,9 +99,9 @@
 
   <div class="card">
 
-    <div class="heart">💌</div>
+  
 
-    <h1>きみへ</h1>
+  <h1>for you</h1>
 
     <div id="message" class="loading">
       メッセージを読み込んでいます…
