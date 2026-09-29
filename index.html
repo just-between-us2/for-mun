@@ -100,11 +100,37 @@ body::before {
       color: #aaa;
       font-size: 16px;
     }
+    .shooting-star {
+  position: fixed;
+  top: 22%;
+  left: 18%;
+  width: 55px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(190, 180, 225, 0.55)
+  );
+  transform: rotate(-25deg);
+  border-radius: 999px;
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shooting-star::after {
+  content: "✦";
+  position: absolute;
+  right: -3px;
+  top: -8px;
+  color: rgba(170, 160, 215, 0.55);
+  font-size: 13px;
+}
   </style>
 </head>
 
 <body>
-
+<div class="shooting-star"></div>
   <div class="card">
 
   
