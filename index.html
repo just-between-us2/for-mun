@@ -443,6 +443,127 @@
         #aaa;
     }
 
+    /* ===== 秘密のしりとり ===== */
+
+.secret-area {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.secret-divider {
+  width: 65%;
+  height: 1px;
+  margin: 0 auto 22px;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+}
+
+.secret-icons {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+}
+
+.secret-button {
+  background: none;
+  border: none;
+  padding: 6px;
+
+  font-size: 28px;
+  cursor: pointer;
+
+  opacity: 0.72;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    filter 0.2s ease;
+}
+
+.secret-button:active {
+  transform: scale(0.85);
+}
+
+.secret-button.correct {
+  opacity: 1;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+}
+
+.secret-button.wrong {
+  animation: secretShake 0.3s;
+}
+
+@keyframes secretShake {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-4px); }
+  50%  { transform: translateX(4px); }
+  75%  { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+
+/* 正解したら出てくる扉 */
+
+.secret-door {
+  display: none;
+  margin-top: 28px;
+  opacity: 0;
+}
+
+.secret-door.open {
+  display: block;
+  animation: secretDoorAppear 1s ease forwards;
+}
+
+.secret-moon {
+  font-size: 25px;
+  margin-bottom: 8px;
+
+  animation: secretMoonGlow 1.7s ease-in-out infinite alternate;
+}
+
+.secret-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  opacity: 0.6;
+  margin-bottom: 10px;
+}
+
+.secret-door-button {
+  background: none;
+  border: none;
+
+  font-size: 44px;
+  cursor: pointer;
+}
+
+@keyframes secretDoorAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes secretMoonGlow {
+  from {
+    filter: drop-shadow(0 0 3px rgba(255,255,255,0.2));
+  }
+
+  to {
+    filter: drop-shadow(0 0 14px rgba(255,255,255,0.9));
+  }
+}
+    
   </style>
 </head>
 
@@ -525,7 +646,33 @@
     <div id="reactionStatus"></div>
 
   </div>
+  
+<div id="reactionStatus"></div>
 
+</div>
+
+<!-- 秘密のしりとり -->
+<div class="secret-area">
+
+  <div class="secret-divider"></div>
+
+  <div class="secret-icons">
+    <button class="secret-button" data-secret="shoe">👟</button>
+    <button class="secret-button" data-secret="milk">🍼</button>
+    <button class="secret-button" data-secret="mouse">🐹</button>
+    <button class="secret-button" data-secret="moon">🌙</button>
+  </div>
+
+  <div id="secretDoor" class="secret-door">
+    <div class="secret-moon">🌙</div>
+    <div class="secret-label">SECRET</div>
+    <button id="secretDoorButton" class="secret-door-button">🚪</button>
+  </div>
+
+</div>
+
+<!-- 送信時間 -->
+<div id="date"></div>
 
   <!-- 送信時間 -->
 
@@ -1080,7 +1227,70 @@ document
 
 loadLatestPost();
 
+/* ===== 秘密のしりとり ===== */
 
+const secretAnswer = [
+  "mouse",
+  "milk",
+  "shoe",
+  "moon"
+];
+
+let secretStep = 0;
+
+const secretButtons =
+  document.querySelectorAll(".secret-button");
+
+const secretDoor =
+  document.getElementById("secretDoor");
+
+secretButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const value =
+      button.dataset.secret;
+
+    if (value === secretAnswer[secretStep]) {
+
+      button.classList.add("correct");
+
+      secretStep++;
+
+      if (secretStep === secretAnswer.length) {
+
+        setTimeout(() => {
+
+          secretDoor.classList.add("open");
+
+        }, 500);
+
+      }
+
+    } else {
+
+      button.classList.add("wrong");
+
+      setTimeout(() => {
+
+        button.classList.remove("wrong");
+
+      }, 300);
+
+      secretStep = 0;
+
+      secretButtons.forEach(btn => {
+
+        btn.classList.remove("correct");
+
+      });
+
+    }
+
+  });
+
+});
+  
 </script>
 
 
