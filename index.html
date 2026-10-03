@@ -2,248 +2,715 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>きみへ 💌</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
+
       min-height: 100vh;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       padding: 24px;
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
-                   "Noto Sans JP", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Hiragino Sans",
+        "Noto Sans JP",
+        sans-serif;
+
       background:
-        radial-gradient(circle at top left, #fff0f5, transparent 45%),
-        linear-gradient(160deg, #fffafa, #ffeef4);
+        radial-gradient(
+          circle at top left,
+          #fff0f5,
+          transparent 45%
+        ),
+        linear-gradient(
+          160deg,
+          #fffafa,
+          #ffeef4
+        );
+
       color: #333;
     }
 
+
     body::before {
+
       content: "✦";
+
       position: fixed;
+
       top: 10%;
       left: 7%;
-      color: rgba(170, 160, 215, 0.32);
+
+      color:
+        rgba(
+          170,
+          160,
+          215,
+          0.32
+        );
+
       font-size: 14px;
+
       pointer-events: none;
+
       z-index: 0;
 
       text-shadow:
-        75px 95px 0 rgba(170,160,215,0.22),
-        165px 25px 0 rgba(170,160,215,0.30),
-        270px 125px 0 rgba(170,160,215,0.20),
-        35px 280px 0 rgba(170,160,215,0.25),
-        145px 360px 0 rgba(170,160,215,0.18),
-        300px 300px 0 rgba(170,160,215,0.25),
-        80px 520px 0 rgba(170,160,215,0.18),
-        250px 600px 0 rgba(170,160,215,0.22);
+
+        75px 95px 0
+        rgba(170,160,215,0.22),
+
+        165px 25px 0
+        rgba(170,160,215,0.30),
+
+        270px 125px 0
+        rgba(170,160,215,0.20),
+
+        35px 280px 0
+        rgba(170,160,215,0.25),
+
+        145px 360px 0
+        rgba(170,160,215,0.18),
+
+        300px 300px 0
+        rgba(170,160,215,0.25),
+
+        80px 520px 0
+        rgba(170,160,215,0.18),
+
+        250px 600px 0
+        rgba(170,160,215,0.22);
     }
+
 
     body::after {
+
       content: "☾";
+
       position: fixed;
+
       top: 11%;
       right: 10%;
-      color: rgba(255, 255, 255, 0.72);
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          0.72
+        );
+
       font-size: 42px;
-      text-shadow: 0 0 14px rgba(255, 255, 255, 0.45);
+
+      text-shadow:
+        0 0 14px
+        rgba(
+          255,
+          255,
+          255,
+          0.45
+        );
+
       pointer-events: none;
+
       z-index: 0;
     }
+
 
     .shooting-star {
+
       position: fixed;
+
       top: 22%;
       left: 18%;
+
       width: 55px;
       height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(190, 180, 225, 0.55)
-      );
-      transform: rotate(-25deg);
-      border-radius: 999px;
-      opacity: 0.65;
-      pointer-events: none;
-      z-index: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(
+            190,
+            180,
+            225,
+            0.55
+          )
+        );
+
+      transform:
+        rotate(-25deg);
+
+      border-radius:
+        999px;
+
+      opacity:
+        0.65;
+
+      pointer-events:
+        none;
+
+      z-index:
+        0;
     }
+
 
     .shooting-star::after {
+
       content: "✦";
-      position: absolute;
-      right: -1px;
-      top: -8px;
-      color: rgba(170, 160, 215, 0.55);
-      font-size: 13px;
+
+      position:
+        absolute;
+
+      right:
+        -1px;
+
+      top:
+        -8px;
+
+      color:
+        rgba(
+          170,
+          160,
+          215,
+          0.55
+        );
+
+      font-size:
+        13px;
     }
+
 
     .card {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 430px;
-      background: rgba(255,255,255,0.92);
-      border-radius: 28px;
-      padding: 38px 25px;
-      text-align: center;
-      box-shadow: 0 15px 45px rgba(180, 100, 130, 0.15);
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      width:
+        100%;
+
+      max-width:
+        430px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.92
+        );
+
+      border-radius:
+        28px;
+
+      padding:
+        38px 25px;
+
+      text-align:
+        center;
+
+      box-shadow:
+        0 15px 45px
+        rgba(
+          180,
+          100,
+          130,
+          0.15
+        );
     }
+
 
     h1 {
-      font-size: 20px;
-      margin: 0 0 28px;
-      font-weight: 600;
+
+      font-size:
+        20px;
+
+      margin:
+        0 0 28px;
+
+      font-weight:
+        600;
     }
+
 
     #message {
-      font-size: 21px;
-      line-height: 1.9;
-      white-space: pre-wrap;
-      word-break: break-word;
+
+      font-size:
+        21px;
+
+      line-height:
+        1.9;
+
+      white-space:
+        pre-wrap;
+
+      word-break:
+        break-word;
     }
 
-    #date {
-      margin-top: 28px;
-      font-size: 12px;
-      color: #aaa;
-    }
 
     .loading {
-      color: #aaa;
-      font-size: 16px;
+
+      color:
+        #aaa;
+
+      font-size:
+        16px;
     }
+
 
     #photoArea {
-      display: none;
-      margin-top: 26px;
+
+      display:
+        none;
+
+      margin-top:
+        26px;
     }
 
+
     #latestPhoto {
-      width: 100%;
-      max-height: 420px;
-      object-fit: cover;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(150, 100, 120, 0.12);
+
+      width:
+        100%;
+
+      max-height:
+        420px;
+
+      object-fit:
+        cover;
+
+      border-radius:
+        20px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(
+          150,
+          100,
+          120,
+          0.12
+        );
     }
+
+
+    /* ------------------
+       リアクション
+    ------------------- */
+
+    #reactionArea {
+
+      display:
+        none;
+
+      margin-top:
+        28px;
+
+      padding-top:
+        22px;
+
+      border-top:
+        1px solid #f3e7eb;
+    }
+
+
+    .reaction-title {
+
+      font-size:
+        12px;
+
+      color:
+        #aaa;
+
+      margin-bottom:
+        12px;
+    }
+
+
+    .reaction-buttons {
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      gap:
+        10px;
+
+      flex-wrap:
+        wrap;
+    }
+
+
+    .reaction-button {
+
+      width:
+        50px;
+
+      height:
+        50px;
+
+      border:
+        none;
+
+      border-radius:
+        50%;
+
+      background:
+        #fff5f8;
+
+      font-size:
+        23px;
+
+      cursor:
+        pointer;
+
+      transition:
+        transform 0.15s,
+        background 0.15s;
+    }
+
+
+    .reaction-button:active {
+
+      transform:
+        scale(0.9);
+    }
+
+
+    .reaction-button.selected {
+
+      background:
+        #f7dce6;
+
+      transform:
+        scale(1.08);
+    }
+
+
+    #reactionStatus {
+
+      margin-top:
+        12px;
+
+      min-height:
+        18px;
+
+      font-size:
+        12px;
+
+      color:
+        #aaa;
+    }
+
+
+    /* ------------------
+       日時
+    ------------------- */
+
+    #date {
+
+      margin-top:
+        28px;
+
+      font-size:
+        12px;
+
+      color:
+        #aaa;
+    }
+
   </style>
 </head>
+
 
 <body>
 
 <div class="shooting-star"></div>
 
+
 <div class="card">
 
-  <h1>for you</h1>
+  <h1>
+    for you
+  </h1>
 
-  <div id="message" class="loading">
-  メッセージを読み込んでいます…
+
+  <div
+    id="message"
+    class="loading"
+  >
+    メッセージを読み込んでいます…
+  </div>
+
+
+  <div id="photoArea">
+
+    <img
+      id="latestPhoto"
+      alt="latest photo"
+    >
+
+  </div>
+
+
+  <!-- リアクション -->
+
+  <div id="reactionArea">
+
+    <div class="reaction-title">
+      気持ちを返す
+    </div>
+
+
+    <div class="reaction-buttons">
+
+      <button
+        class="reaction-button"
+        data-reaction="♡"
+      >
+        ♡
+      </button>
+
+
+      <button
+        class="reaction-button"
+        data-reaction="🥹"
+      >
+        🥹
+      </button>
+
+
+      <button
+        class="reaction-button"
+        data-reaction="😂"
+      >
+        😂
+      </button>
+
+
+      <button
+        class="reaction-button"
+        data-reaction="👍"
+      >
+        👍
+      </button>
+
+    </div>
+
+
+    <div id="reactionStatus"></div>
+
+  </div>
+
+
+  <!-- 送信時間 -->
+
+  <div id="date"></div>
+
 </div>
 
-<div id="photoArea">
-  <img id="latestPhoto" alt="latest photo">
-</div>
 
-<div id="date"></div>
-
-</div>
-  
 <script>
+
 
 const PROJECT_URL =
   "https://pwuhcajvuwoumgzcrzcu.supabase.co";
 
+
 const REST_URL =
-  PROJECT_URL + "/rest/v1";
+  PROJECT_URL +
+  "/rest/v1";
+
 
 const SUPABASE_KEY =
   "sb_publishable_xKz256OVExfMdxs0qajatw_LUtHDFSd";
 
 
+let currentPostId =
+  null;
+
+
+/* -------------------------
+   最新投稿を読み込む
+-------------------------- */
+
 async function loadLatestPost() {
 
   try {
 
-    const response = await fetch(
-      REST_URL +
-      "/messages?select=message,photo_url,created_at&order=id.desc&limit=1",
-      {
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
+    const response =
+      await fetch(
+
+        REST_URL +
+
+        "/messages" +
+
+        "?select=id,message,photo_url,created_at,viewed_at,reaction" +
+
+        "&order=id.desc" +
+
+        "&limit=1",
+
+        {
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+          }
+
         }
-      }
-    );
+
+      );
+
 
     if (!response.ok) {
-      throw new Error("読み込みに失敗しました");
+
+      throw new Error(
+        "読み込みに失敗しました"
+      );
+
     }
 
-    const data = await response.json();
+
+    const data =
+      await response.json();
+
 
     const messageEl =
-      document.getElementById("message");
+      document.getElementById(
+        "message"
+      );
+
 
     const photoArea =
-      document.getElementById("photoArea");
+      document.getElementById(
+        "photoArea"
+      );
+
 
     const latestPhoto =
-      document.getElementById("latestPhoto");
+      document.getElementById(
+        "latestPhoto"
+      );
+
+
+    const reactionArea =
+      document.getElementById(
+        "reactionArea"
+      );
+
 
     const dateEl =
-      document.getElementById("date");
+      document.getElementById(
+        "date"
+      );
 
+
+    /* 投稿なし */
 
     if (data.length === 0) {
 
-      messageEl.classList.remove("loading");
+      messageEl
+        .classList
+        .remove(
+          "loading"
+        );
+
 
       messageEl.textContent =
         "まだ届いていません 💭";
 
+
       photoArea.style.display =
         "none";
 
-      latestPhoto.removeAttribute("src");
 
-      dateEl.textContent = "";
+      reactionArea.style.display =
+        "none";
+
+
+      dateEl.textContent =
+        "";
+
 
       return;
+
     }
 
 
-    const post = data[0];
+    const post =
+      data[0];
 
 
-    /* メッセージ */
+    currentPostId =
+      post.id;
 
-    messageEl.classList.remove("loading");
+
+    /* ----------------
+       メッセージ
+    ----------------- */
+
+    messageEl
+      .classList
+      .remove(
+        "loading"
+      );
+
 
     messageEl.textContent =
-      post.message || "";
+      post.message ||
+      "";
 
 
-    /* 今回送られた写真だけ */
+    /* ----------------
+       写真
+    ----------------- */
 
     if (post.photo_url) {
 
       latestPhoto.src =
         post.photo_url;
 
+
       photoArea.style.display =
         "block";
 
     } else {
 
-      latestPhoto.removeAttribute("src");
+      latestPhoto
+        .removeAttribute(
+          "src"
+        );
+
 
       photoArea.style.display =
         "none";
@@ -251,28 +718,83 @@ async function loadLatestPost() {
     }
 
 
-    /* 送信時間 */
+    /* ----------------
+       リアクション
+    ----------------- */
+
+    reactionArea.style.display =
+      "block";
+
+
+    updateReactionButtons(
+      post.reaction
+    );
+
+
+    /* ----------------
+       送信時間
+    ----------------- */
 
     const date =
-      new Date(post.created_at);
+      new Date(
+        post.created_at
+      );
+
 
     dateEl.textContent =
-      date.toLocaleString("ja-JP", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      });
+      date.toLocaleString(
+        "ja-JP",
+        {
+          year:
+            "numeric",
+
+          month:
+            "long",
+
+          day:
+            "numeric",
+
+          hour:
+            "2-digit",
+
+          minute:
+            "2-digit"
+        }
+      );
+
+
+    /* ----------------
+       初回だけ既読保存
+    ----------------- */
+
+    if (!post.viewed_at) {
+
+      await markAsViewed(
+        post.id
+      );
+
+    }
+
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     const messageEl =
-      document.getElementById("message");
+      document.getElementById(
+        "message"
+      );
 
-    messageEl.classList.remove("loading");
+
+    messageEl
+      .classList
+      .remove(
+        "loading"
+      );
+
 
     messageEl.textContent =
       "読み込めませんでした 🥲";
@@ -282,9 +804,285 @@ async function loadLatestPost() {
 }
 
 
+/* -------------------------
+   既読
+-------------------------- */
+
+async function markAsViewed(
+  postId
+) {
+
+  try {
+
+    const response =
+      await fetch(
+
+        REST_URL +
+
+        "/messages" +
+
+        "?id=eq." +
+        postId +
+
+        "&viewed_at=is.null",
+
+        {
+
+          method:
+            "PATCH",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+          },
+
+          body:
+            JSON.stringify(
+              {
+                viewed_at:
+                  new Date()
+                    .toISOString()
+              }
+            )
+        }
+
+      );
+
+
+    if (!response.ok) {
+
+      const errorText =
+        await response.text();
+
+
+      throw new Error(
+        "既読保存失敗: " +
+        errorText
+      );
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+  }
+
+}
+
+
+/* -------------------------
+   リアクション保存
+-------------------------- */
+
+async function saveReaction(
+  reaction
+) {
+
+  if (!currentPostId) {
+
+    return;
+
+  }
+
+
+  const reactionStatus =
+    document.getElementById(
+      "reactionStatus"
+    );
+
+
+  reactionStatus.textContent =
+    "届けています…";
+
+
+  try {
+
+    const response =
+      await fetch(
+
+        REST_URL +
+
+        "/messages" +
+
+        "?id=eq." +
+        currentPostId,
+
+        {
+
+          method:
+            "PATCH",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+          },
+
+          body:
+            JSON.stringify(
+              {
+                reaction:
+                  reaction
+              }
+            )
+        }
+
+      );
+
+
+    if (!response.ok) {
+
+      const errorText =
+        await response.text();
+
+
+      throw new Error(
+        "リアクション保存失敗: " +
+        errorText
+      );
+
+    }
+
+
+    updateReactionButtons(
+      reaction
+    );
+
+
+    reactionStatus.textContent =
+      "届きました ♡";
+
+
+    setTimeout(
+      function() {
+
+        reactionStatus.textContent =
+          "";
+
+      },
+      1500
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    reactionStatus.textContent =
+      "送れませんでした 🥲";
+
+  }
+
+}
+
+
+/* -------------------------
+   選択中リアクション表示
+-------------------------- */
+
+function updateReactionButtons(
+  reaction
+) {
+
+  const buttons =
+    document.querySelectorAll(
+      ".reaction-button"
+    );
+
+
+  buttons.forEach(
+    function(button) {
+
+      if (
+        button.dataset.reaction ===
+        reaction
+      ) {
+
+        button
+          .classList
+          .add(
+            "selected"
+          );
+
+      } else {
+
+        button
+          .classList
+          .remove(
+            "selected"
+          );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* -------------------------
+   ボタン操作
+-------------------------- */
+
+document
+  .querySelectorAll(
+    ".reaction-button"
+  )
+  .forEach(
+    function(button) {
+
+      button.addEventListener(
+        "click",
+        function() {
+
+          saveReaction(
+            button.dataset.reaction
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* -------------------------
+   最初に読み込む
+-------------------------- */
+
 loadLatestPost();
 
+
 </script>
+
 
 </body>
 </html>
