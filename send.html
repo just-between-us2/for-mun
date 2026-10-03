@@ -231,115 +231,108 @@ sendButton.addEventListener("click", async function () {
 
   try {
 
-    /* -----------------
-       メッセージ送信
-    ------------------ */
+/* -----------------
+   写真を先にアップロード
+------------------ */
 
-    if (message) {
+let photoUrl = null;
 
-      const messageResponse =
-        await fetch(
-          REST_URL + "/messages",
-          {
-            method: "POST",
+if (file) {
 
-            headers: {
-              "apikey": SUPABASE_KEY,
+  const extension =
+    file.name.includes(".")
+      ? file.name.split(".").pop()
+      : "jpg";
 
-              "Authorization":
-                "Bearer " + SUPABASE_KEY,
+  const fileName =
+    Date.now() + "." + extension;
 
-              "Content-Type":
-                "application/json",
+  const photoResponse =
+    await fetch(
+      STORAGE_URL +
+      "/object/" +
+      BUCKET +
+      "/" +
+      fileName,
+      {
+        method: "POST",
 
-              "Prefer":
-                "return=minimal"
-            },
+        headers: {
+          "apikey": SUPABASE_KEY,
 
-            body: JSON.stringify({
-              message: message
-            })
-          }
-        );
+          "Authorization":
+            "Bearer " + SUPABASE_KEY,
 
+          "Content-Type":
+            file.type || "image/jpeg",
 
-      if (!messageResponse.ok) {
+          "x-upsert": "false"
+        },
 
-        const errorText =
-          await messageResponse.text();
-
-        throw new Error(
-          "メッセージ送信失敗: " +
-          errorText
-        );
+        body: file
       }
+    );
 
+  if (!photoResponse.ok) {
+
+    const errorText =
+      await photoResponse.text();
+
+    throw new Error(
+      "写真送信失敗: " + errorText
+    );
+  }
+
+  photoUrl =
+    STORAGE_URL +
+    "/object/public/" +
+    BUCKET +
+    "/" +
+    encodeURIComponent(fileName);
+}
+
+
+/* -----------------
+   メッセージ＋写真URLを
+   1セットで保存
+------------------ */
+
+const messageResponse =
+  await fetch(
+    REST_URL + "/messages",
+    {
+      method: "POST",
+
+      headers: {
+        "apikey": SUPABASE_KEY,
+
+        "Authorization":
+          "Bearer " + SUPABASE_KEY,
+
+        "Content-Type":
+          "application/json",
+
+        "Prefer":
+          "return=minimal"
+      },
+
+      body: JSON.stringify({
+        message: message || "",
+        photo_url: photoUrl
+      })
     }
+  );
 
+if (!messageResponse.ok) {
 
-    /* -----------------
-       写真送信
-    ------------------ */
+  const errorText =
+    await messageResponse.text();
 
-    if (file) {
-
-      const extension =
-        file.name.includes(".")
-          ? file.name.split(".").pop()
-          : "jpg";
-
-
-      const fileName =
-        Date.now() +
-        "." +
-        extension;
-
-
-      const photoResponse =
-        await fetch(
-          STORAGE_URL +
-          "/object/" +
-          BUCKET +
-          "/" +
-          fileName,
-          {
-            method: "POST",
-
-            headers: {
-
-              "apikey":
-                SUPABASE_KEY,
-
-              "Authorization":
-                "Bearer " +
-                SUPABASE_KEY,
-
-              "Content-Type":
-                file.type ||
-                "image/jpeg",
-
-              "x-upsert":
-                "false"
-            },
-
-            body: file
-          }
-        );
-
-
-      if (!photoResponse.ok) {
-
-        const errorText =
-          await photoResponse.text();
-
-        throw new Error(
-          "写真送信失敗: " +
-          errorText
-        );
-      }
-
-    }
-
+  throw new Error(
+    "メッセージ送信失敗: " +
+    errorText
+  );
+}              
 
   status.textContent = "届きました 💌♡";
 
