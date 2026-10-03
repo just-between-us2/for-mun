@@ -58,6 +58,33 @@
       z-index: 0;
     }
 
+    .shooting-star {
+      position: fixed;
+      top: 22%;
+      left: 18%;
+      width: 55px;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(190, 180, 225, 0.55)
+      );
+      transform: rotate(-25deg);
+      border-radius: 999px;
+      opacity: 0.65;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .shooting-star::after {
+      content: "✦";
+      position: absolute;
+      right: -1px;
+      top: -8px;
+      color: rgba(170, 160, 215, 0.55);
+      font-size: 13px;
+    }
+
     .card {
       position: relative;
       z-index: 1;
@@ -94,34 +121,6 @@
       font-size: 16px;
     }
 
-    .shooting-star {
-      position: fixed;
-      top: 22%;
-      left: 18%;
-      width: 55px;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(190, 180, 225, 0.55)
-      );
-      transform: rotate(-25deg);
-      border-radius: 999px;
-      opacity: 0.65;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .shooting-star::after {
-      content: "✦";
-      position: absolute;
-      right: -1px;
-      top: -8px;
-      color: rgba(170, 160, 215, 0.55);
-      font-size: 13px;
-    }
-
-    /* 写真エリア */
     #photoArea {
       display: none;
       margin-top: 26px;
@@ -133,59 +132,6 @@
       object-fit: cover;
       border-radius: 20px;
       box-shadow: 0 8px 25px rgba(150, 100, 120, 0.12);
-    }
-
-    /* 投稿エリア */
-    .upload-area {
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid #f1e4e9;
-    }
-
-    .file-label {
-      display: inline-block;
-      padding: 12px 18px;
-      background: #fff0f5;
-      border-radius: 999px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    #photoInput {
-      display: none;
-    }
-
-    #preview {
-      display: none;
-      width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-      border-radius: 18px;
-      margin-top: 18px;
-    }
-
-    #uploadButton {
-      display: none;
-      width: 100%;
-      margin-top: 16px;
-      border: none;
-      padding: 14px;
-      border-radius: 999px;
-      background: #eab6c8;
-      color: white;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    #uploadButton:disabled {
-      opacity: 0.5;
-    }
-
-    #uploadStatus {
-      margin-top: 12px;
-      font-size: 13px;
-      color: #999;
-      min-height: 18px;
     }
   </style>
 </head>
@@ -208,28 +154,6 @@
     <img id="latestPhoto" alt="latest photo">
   </div>
 
-  <div class="upload-area">
-
-    <label class="file-label" for="photoInput">
-      📷 写真を選ぶ
-    </label>
-
-    <input
-      type="file"
-      id="photoInput"
-      accept="image/*"
-    >
-
-    <img id="preview">
-
-    <button id="uploadButton">
-      写真を届ける 💌
-    </button>
-
-    <div id="uploadStatus"></div>
-
-  </div>
-
 </div>
 
 <script>
@@ -249,10 +173,6 @@ const SUPABASE_KEY =
 const BUCKET = "photos";
 
 
-/* -------------------------
-   メッセージ読み込み
--------------------------- */
-
 async function loadMessage() {
 
   try {
@@ -269,7 +189,7 @@ async function loadMessage() {
     );
 
     if (!response.ok) {
-      throw new Error("読み込みに失敗しました");
+      throw new Error("読み込み失敗");
     }
 
     const data = await response.json();
@@ -311,10 +231,6 @@ async function loadMessage() {
 }
 
 
-/* -------------------------
-   最新写真を表示
--------------------------- */
-
 async function loadLatestPhoto() {
 
   try {
@@ -341,7 +257,7 @@ async function loadLatestPhoto() {
     );
 
     if (!response.ok) {
-      throw new Error("写真一覧を取得できませんでした");
+      throw new Error("写真取得失敗");
     }
 
     const files = await response.json();
@@ -359,10 +275,8 @@ async function loadLatestPhoto() {
       "/" +
       encodeURIComponent(fileName);
 
-    const img =
-      document.getElementById("latestPhoto");
-
-    img.src = publicUrl;
+    document.getElementById("latestPhoto").src =
+      publicUrl;
 
     document.getElementById("photoArea").style.display =
       "block";
@@ -375,139 +289,6 @@ async function loadLatestPhoto() {
 
 }
 
-
-/* -------------------------
-   写真選択
--------------------------- */
-
-const photoInput =
-  document.getElementById("photoInput");
-
-const preview =
-  document.getElementById("preview");
-
-const uploadButton =
-  document.getElementById("uploadButton");
-
-const uploadStatus =
-  document.getElementById("uploadStatus");
-
-
-photoInput.addEventListener(
-  "change",
-  function () {
-
-    const file =
-      photoInput.files[0];
-
-    if (!file) {
-      return;
-    }
-
-    preview.src =
-      URL.createObjectURL(file);
-
-    preview.style.display =
-      "block";
-
-    uploadButton.style.display =
-      "block";
-
-    uploadStatus.textContent = "";
-
-  }
-);
-
-
-/* -------------------------
-   写真アップロード
--------------------------- */
-
-uploadButton.addEventListener(
-  "click",
-  async function () {
-
-    const file =
-      photoInput.files[0];
-
-    if (!file) {
-      return;
-    }
-
-    uploadButton.disabled = true;
-
-    uploadStatus.textContent =
-      "届けています… 💌";
-
-    try {
-
-      const extension =
-        file.name.split(".").pop();
-
-      const fileName =
-        Date.now() + "." + extension;
-
-      const response =
-        await fetch(
-          STORAGE_URL +
-          "/object/" +
-          BUCKET +
-          "/" +
-          fileName,
-          {
-            method: "POST",
-            headers: {
-              "apikey": SUPABASE_KEY,
-              "Authorization":
-                "Bearer " + SUPABASE_KEY,
-              "Content-Type":
-                file.type,
-              "x-upsert": "false"
-            },
-            body: file
-          }
-        );
-
-      if (!response.ok) {
-
-        const errorText =
-          await response.text();
-
-        throw new Error(errorText);
-
-      }
-
-      uploadStatus.textContent =
-        "届きました 📸♡";
-
-      photoInput.value = "";
-
-      preview.style.display =
-        "none";
-
-      uploadButton.style.display =
-        "none";
-
-      await loadLatestPhoto();
-
-    } catch (error) {
-
-      console.error(error);
-
-      uploadStatus.textContent =
-        "アップロードに失敗しました 🥲";
-
-    } finally {
-
-      uploadButton.disabled = false;
-
-    }
-
-  }
-);
-
-
-/* 最初に読み込む */
 
 loadMessage();
 loadLatestPhoto();
