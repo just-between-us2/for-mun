@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>写真を届ける 📸</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+                   "Noto Sans JP", sans-serif;
+      background:
+        radial-gradient(circle at top left, #fff0f5, transparent 45%),
+        linear-gradient(160deg, #fffafa, #ffeef4);
+      color: #333;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      background: rgba(255,255,255,0.94);
+      border-radius: 28px;
+      padding: 34px 24px;
+      text-align: center;
+      box-shadow: 0 15px 45px rgba(180,100,130,0.15);
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 26px;
+    }
+
+    .file-label {
+      display: inline-block;
+      padding: 13px 20px;
+      background: #fff0f5;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    #photoInput {
+      display: none;
+    }
+
+    #preview {
+      display: none;
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-top: 22px;
+    }
+
+    #uploadButton {
+      display: none;
+      width: 100%;
+      margin-top: 18px;
+      border: none;
+      padding: 14px;
+      border-radius: 999px;
+      background: #eab6c8;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #uploadButton:disabled {
+      opacity: 0.5;
+    }
+
+    #status {
+      margin-top: 14px;
+      min-height: 20px;
+      color: #999;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1>写真を届ける 📸</h1>
+
+  <label class="file-label" for="photoInput">
+    写真を選ぶ
+  </label>
+
+  <input
+    id="photoInput"
+    type="file"
+    accept="image/*"
+  >
+
+  <img id="preview">
+
+  <button id="uploadButton">
+    届ける 💌
+  </button>
+
+  <div id="status"></div>
+
+</div>
+
+<script>
+
+const PROJECT_URL =
+  "https://pwuhcajvuwoumgzcrzcu.supabase.co";
+
+const STORAGE_URL =
+  PROJECT_URL + "/storage/v1";
+
+const SUPABASE_KEY =
+  "sb_publishable_xKz256OVExfMdxs0qajatw_LUtHDFSd";
+
+const BUCKET = "photos";
+
+const photoInput =
+  document.getElementById("photoInput");
+
+const preview =
+  document.getElementById("preview");
+
+const uploadButton =
+  document.getElementById("uploadButton");
+
+const status =
+  document.getElementById("status");
+
+
+photoInput.addEventListener("change", function () {
+
+  const file =
+    photoInput.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  preview.src =
+    URL.createObjectURL(file);
+
+  preview.style.display =
+    "block";
+
+  uploadButton.style.display =
+    "block";
+
+  status.textContent = "";
+
+});
+
+
+uploadButton.addEventListener("click", async function () {
+
+  const file =
+    photoInput.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  uploadButton.disabled = true;
+
+  status.textContent =
+    "届けています… 💌";
+
+  try {
+
+    const extension =
+      file.name.includes(".")
+        ? file.name.split(".").pop()
+        : "jpg";
+
+    const fileName =
+      Date.now() + "." + extension;
+
+    const response =
+      await fetch(
+        STORAGE_URL +
+        "/object/" +
+        BUCKET +
+        "/" +
+        fileName,
+        {
+          method: "POST",
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY,
+            "Content-Type":
+              file.type || "image/jpeg",
+            "x-upsert": "false"
+          },
+          body: file
+        }
+      );
+
+    if (!response.ok) {
+
+      const errorText =
+        await response.text();
+
+      throw new Error(errorText);
+
+    }
+
+    status.textContent =
+      "届きました 📸♡";
+
+    photoInput.value = "";
+
+    preview.style.display =
+      "none";
+
+    uploadButton.style.display =
+      "none";
+
+  } catch (error) {
+
+    console.error(error);
+
+    status.textContent =
+      "アップロードに失敗しました 🥲";
+
+  } finally {
+
+    uploadButton.disabled = false;
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
