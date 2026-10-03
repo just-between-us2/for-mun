@@ -341,19 +341,19 @@ sendButton.addEventListener("click", async function () {
     }
 
 
-    status.textContent =
-      "届きました 💌♡";
+  status.textContent = "届きました 💌♡";
 
+messageInput.value = "";
+photoInput.value = "";
 
-    messageInput.value = "";
+preview.style.display = "none";
 
-    photoInput.value = "";
+const previewTitle =
+  document.getElementById("previewTitle");
 
-    preview.style.display =
-      "none";
-
-    document.getElementById("previewTitle").style.display =
-  "none";
+if (previewTitle) {
+  previewTitle.style.display = "none";
+}
 
   } catch (error) {
 
