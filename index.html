@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -10,13 +12,16 @@
 
   <title>for you</title>
 
+
   <style>
 
     * {
       box-sizing: border-box;
     }
 
+
     body {
+
       margin: 0;
 
       min-height: 100vh;
@@ -47,8 +52,11 @@
         );
 
       color: #333;
+
     }
 
+
+    /* 星 */
 
     body::before {
 
@@ -60,12 +68,7 @@
       left: 7%;
 
       color:
-        rgba(
-          170,
-          160,
-          215,
-          0.32
-        );
+        rgba(170,160,215,0.32);
 
       font-size: 14px;
 
@@ -98,8 +101,11 @@
 
         250px 600px 0
         rgba(170,160,215,0.22);
+
     }
 
+
+    /* 月 */
 
     body::after {
 
@@ -111,29 +117,22 @@
       right: 10%;
 
       color:
-        rgba(
-          255,
-          255,
-          255,
-          0.72
-        );
+        rgba(255,255,255,0.72);
 
       font-size: 42px;
 
       text-shadow:
         0 0 14px
-        rgba(
-          255,
-          255,
-          255,
-          0.45
-        );
+        rgba(255,255,255,0.45);
 
       pointer-events: none;
 
       z-index: 0;
+
     }
 
+
+    /* 流れ星 */
 
     .shooting-star {
 
@@ -149,28 +148,20 @@
         linear-gradient(
           90deg,
           transparent,
-          rgba(
-            190,
-            180,
-            225,
-            0.55
-          )
+          rgba(190,180,225,0.55)
         );
 
       transform:
         rotate(-25deg);
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
-      opacity:
-        0.65;
+      opacity: 0.65;
 
-      pointer-events:
-        none;
+      pointer-events: none;
 
-      z-index:
-        0;
+      z-index: 0;
+
     }
 
 
@@ -178,1121 +169,1407 @@
 
       content: "✦";
 
-      position:
-        absolute;
+      position: absolute;
 
-      right:
-        -1px;
-
-      top:
-        -8px;
+      right: -1px;
+      top: -8px;
 
       color:
-        rgba(
-          170,
-          160,
-          215,
-          0.55
-        );
+        rgba(170,160,215,0.55);
 
-      font-size:
-        13px;
+      font-size: 13px;
+
     }
 
 
+    /* カード */
+
     .card {
 
-      position:
-        relative;
+      position: relative;
 
-      z-index:
-        1;
+      z-index: 1;
 
-      width:
-        100%;
-
-      max-width:
-        430px;
+      width: 100%;
+      max-width: 430px;
 
       background:
-        rgba(
-          255,
-          255,
-          255,
-          0.92
-        );
+        rgba(255,255,255,0.92);
 
-      border-radius:
-        28px;
+      border-radius: 28px;
 
       padding:
         38px 25px;
 
-      text-align:
-        center;
+      text-align: center;
 
       box-shadow:
         0 15px 45px
-        rgba(
-          180,
-          100,
-          130,
-          0.15
-        );
+        rgba(180,100,130,0.15);
+
     }
 
 
     h1 {
 
-      font-size:
-        20px;
+      font-size: 20px;
 
       margin:
         0 0 28px;
 
-      font-weight:
-        600;
+      font-weight: 600;
+
     }
 
 
+    /* メッセージ */
+
     #message {
 
-      font-size:
-        21px;
+      font-size: 21px;
 
-      line-height:
-        1.9;
+      line-height: 1.9;
 
-      white-space:
-        pre-wrap;
+      white-space: pre-wrap;
 
-      word-break:
-        break-word;
+      word-break: break-word;
+
     }
 
 
     .loading {
 
-      color:
-        #aaa;
+      color: #aaa;
 
-      font-size:
-        16px;
+      font-size: 16px;
+
     }
 
 
+    /* 写真 */
+
     #photoArea {
 
-      display:
-        none;
+      display: none;
 
-      margin-top:
-        26px;
+      margin-top: 26px;
+
     }
 
 
     #latestPhoto {
 
-      width:
-        100%;
+      width: 100%;
 
-      max-height:
-        420px;
+      max-height: 420px;
 
-      object-fit:
-        cover;
+      object-fit: cover;
 
-      border-radius:
-        20px;
+      border-radius: 20px;
 
       box-shadow:
         0 8px 25px
-        rgba(
-          150,
-          100,
-          120,
-          0.12
-        );
+        rgba(150,100,120,0.12);
+
     }
 
 
-    /* ------------------
+    /* =====================
        リアクション
-    ------------------- */
+    ===================== */
 
     #reactionArea {
 
-      display:
-        none;
+      display: none;
 
-      margin-top:
-        28px;
+      margin-top: 28px;
 
-      padding-top:
-        22px;
+      padding-top: 22px;
 
       border-top:
         1px solid #f3e7eb;
+
     }
 
 
     .reaction-title {
 
-      font-size:
-        12px;
+      font-size: 12px;
 
-      color:
-        #aaa;
+      color: #aaa;
 
-      margin-bottom:
-        12px;
+      margin-bottom: 12px;
+
     }
 
 
     .reaction-buttons {
 
-      display:
-        flex;
+      display: flex;
 
-      justify-content:
-        center;
+      justify-content: center;
 
-      gap:
-        10px;
+      gap: 10px;
 
-      flex-wrap:
-        wrap;
+      flex-wrap: wrap;
+
     }
 
 
     .reaction-button {
 
-      width:
-        50px;
+      width: 50px;
+      height: 50px;
 
-      height:
-        50px;
+      border: none;
 
-      border:
-        none;
+      border-radius: 50%;
 
-      border-radius:
-        50%;
+      background: #fff5f8;
 
-      background:
-        #fff5f8;
+      font-size: 23px;
 
-      font-size:
-        23px;
-
-      cursor:
-        pointer;
+      cursor: pointer;
 
       transition:
         transform 0.15s,
         background 0.15s;
+
     }
 
 
     .reaction-button:active {
 
-      transform:
-        scale(0.9);
+      transform: scale(0.9);
+
     }
 
 
     .reaction-button.selected {
 
-      background:
-        #f7dce6;
+      background: #f7dce6;
 
-      transform:
-        scale(1.08);
+      transform: scale(1.08);
+
     }
 
 
     #reactionStatus {
 
-      margin-top:
-        12px;
+      margin-top: 12px;
 
-      min-height:
-        18px;
+      min-height: 18px;
 
-      font-size:
-        12px;
+      font-size: 12px;
 
-      color:
-        #aaa;
+      color: #aaa;
+
     }
 
 
-    /* ------------------
-       日時
-    ------------------- */
+    /* =====================
+       秘密のしりとり
+    ===================== */
+
+    .secret-area {
+
+      margin-top: 34px;
+
+      padding-top: 28px;
+
+      border-top:
+        1px solid #f3e7eb;
+
+      text-align: center;
+
+    }
+
+
+    .secret-icons {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 24px;
+
+    }
+
+
+    .secret-button {
+
+      appearance: none;
+
+      background: none;
+
+      border: none;
+
+      padding: 5px;
+
+      font-size: 28px;
+
+      cursor: pointer;
+
+      opacity: 0.75;
+
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        filter 0.2s ease;
+
+    }
+
+
+    .secret-button:active {
+
+      transform: scale(0.85);
+
+    }
+
+
+    .secret-button.correct {
+
+      opacity: 1;
+
+      filter:
+        drop-shadow(
+          0 0 7px
+          rgba(220,190,230,0.9)
+        );
+
+    }
+
+
+    .secret-button.wrong {
+
+      animation:
+        secretShake 0.3s ease;
+
+    }
+
+
+    @keyframes secretShake {
+
+      0% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-4px);
+      }
+
+      50% {
+        transform: translateX(4px);
+      }
+
+      75% {
+        transform: translateX(-3px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+
+    }
+
+
+    /* 秘密の扉 */
+
+    .secret-door {
+
+      display: none;
+
+      margin-top: 28px;
+
+      opacity: 0;
+
+    }
+
+
+    .secret-door.open {
+
+      display: block;
+
+      animation:
+        secretDoorAppear 1s ease forwards;
+
+    }
+
+
+    .secret-moon {
+
+      font-size: 24px;
+
+      margin-bottom: 7px;
+
+      animation:
+        secretMoonGlow
+        1.7s
+        ease-in-out
+        infinite alternate;
+
+    }
+
+
+    .secret-label {
+
+      margin-bottom: 8px;
+
+      font-size: 10px;
+
+      letter-spacing: 4px;
+
+      color: #b6a8b0;
+
+    }
+
+
+    .secret-door-button {
+
+      appearance: none;
+
+      background: none;
+
+      border: none;
+
+      padding: 4px;
+
+      font-size: 42px;
+
+      cursor: pointer;
+
+    }
+
+
+    @keyframes secretDoorAppear {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(10px);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          translateY(0);
+
+      }
+
+    }
+
+
+    @keyframes secretMoonGlow {
+
+      from {
+
+        filter:
+          drop-shadow(
+            0 0 3px
+            rgba(220,190,230,0.2)
+          );
+
+      }
+
+      to {
+
+        filter:
+          drop-shadow(
+            0 0 13px
+            rgba(220,190,230,0.9)
+          );
+
+      }
+
+    }
+
+
+    /* 日時 */
 
     #date {
 
-      margin-top:
-        28px;
+      margin-top: 28px;
 
-      font-size:
-        12px;
+      font-size: 12px;
 
-      color:
-        #aaa;
+      color: #aaa;
+
     }
 
-    /* ===== 秘密のしりとり ===== */
 
-.secret-area {
-  margin-top: 30px;
-  text-align: center;
-}
-
-.secret-divider {
-  width: 65%;
-  height: 1px;
-  margin: 0 auto 22px;
-
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 255, 255, 0.18),
-    transparent
-  );
-}
-
-.secret-icons {
-  display: flex;
-  justify-content: center;
-  gap: 26px;
-}
-
-.secret-button {
-  background: none;
-  border: none;
-  padding: 6px;
-
-  font-size: 28px;
-  cursor: pointer;
-
-  opacity: 0.72;
-
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease,
-    filter 0.2s ease;
-}
-
-.secret-button:active {
-  transform: scale(0.85);
-}
-
-.secret-button.correct {
-  opacity: 1;
-  filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
-}
-
-.secret-button.wrong {
-  animation: secretShake 0.3s;
-}
-
-@keyframes secretShake {
-  0%   { transform: translateX(0); }
-  25%  { transform: translateX(-4px); }
-  50%  { transform: translateX(4px); }
-  75%  { transform: translateX(-3px); }
-  100% { transform: translateX(0); }
-}
-
-
-/* 正解したら出てくる扉 */
-
-.secret-door {
-  display: none;
-  margin-top: 28px;
-  opacity: 0;
-}
-
-.secret-door.open {
-  display: block;
-  animation: secretDoorAppear 1s ease forwards;
-}
-
-.secret-moon {
-  font-size: 25px;
-  margin-bottom: 8px;
-
-  animation: secretMoonGlow 1.7s ease-in-out infinite alternate;
-}
-
-.secret-label {
-  font-size: 11px;
-  letter-spacing: 4px;
-  opacity: 0.6;
-  margin-bottom: 10px;
-}
-
-.secret-door-button {
-  background: none;
-  border: none;
-
-  font-size: 44px;
-  cursor: pointer;
-}
-
-@keyframes secretDoorAppear {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes secretMoonGlow {
-  from {
-    filter: drop-shadow(0 0 3px rgba(255,255,255,0.2));
-  }
-
-  to {
-    filter: drop-shadow(0 0 14px rgba(255,255,255,0.9));
-  }
-}
-    
   </style>
+
 </head>
 
 
 <body>
 
-<div class="shooting-star"></div>
+
+  <div class="shooting-star"></div>
 
 
-<div class="card">
-
-  <h1>
-    for you
-  </h1>
+  <div class="card">
 
 
-  <div
-    id="message"
-    class="loading"
-  >
-    メッセージを読み込んでいます…
-  </div>
+    <h1>
+      for you
+    </h1>
 
 
-  <div id="photoArea">
+    <!-- メッセージ -->
 
-    <img
-      id="latestPhoto"
-      alt="latest photo"
+    <div
+      id="message"
+      class="loading"
     >
-
-  </div>
-
-
-  <!-- リアクション -->
-
-  <div id="reactionArea">
-
-    <div class="reaction-title">
-      気持ちを返す
+      メッセージを読み込んでいます…
     </div>
 
 
-    <div class="reaction-buttons">
+    <!-- 写真 -->
 
-      <button
-        class="reaction-button"
-        data-reaction="🫶"
+    <div id="photoArea">
+
+      <img
+        id="latestPhoto"
+        alt="latest photo"
       >
-        🫶
-      </button>
-
-
-      <button
-        class="reaction-button"
-        data-reaction="🤟"
-      >
-        🤟
-      </button>
-
-
-      <button
-        class="reaction-button"
-        data-reaction="🦄"
-      >
-        🦄
-      </button>
-
-
-      <button
-        class="reaction-button"
-        data-reaction="🧸"
-      >
-        🧸
-      </button>
 
     </div>
 
 
-    <div id="reactionStatus"></div>
+    <!-- =================
+         リアクション
+    ================== -->
+
+    <div id="reactionArea">
+
+
+      <div class="reaction-title">
+        気持ちを返す
+      </div>
+
+
+      <div class="reaction-buttons">
+
+
+        <button
+          class="reaction-button"
+          data-reaction="🫶"
+        >
+          🫶
+        </button>
+
+
+        <button
+          class="reaction-button"
+          data-reaction="🤟"
+        >
+          🤟
+        </button>
+
+
+        <button
+          class="reaction-button"
+          data-reaction="🦄"
+        >
+          🦄
+        </button>
+
+
+        <button
+          class="reaction-button"
+          data-reaction="🧸"
+        >
+          🧸
+        </button>
+
+
+      </div>
+
+
+      <div id="reactionStatus"></div>
+
+
+    </div>
+
+
+    <!-- =================
+         秘密のしりとり
+    ================== -->
+
+    <div class="secret-area">
+
+
+      <div class="secret-icons">
+
+
+        <button
+          class="secret-button"
+          data-secret="shoe"
+        >
+          👟
+        </button>
+
+
+        <button
+          class="secret-button"
+          data-secret="milk"
+        >
+          🍼
+        </button>
+
+
+        <button
+          class="secret-button"
+          data-secret="mouse"
+        >
+          🐹
+        </button>
+
+
+        <button
+          class="secret-button"
+          data-secret="moon"
+        >
+          🌙
+        </button>
+
+
+      </div>
+
+
+      <div
+        id="secretDoor"
+        class="secret-door"
+      >
+
+
+        <div class="secret-moon">
+          🌙
+        </div>
+
+
+        <div class="secret-label">
+          SECRET
+        </div>
+
+
+        <button
+          id="secretDoorButton"
+          class="secret-door-button"
+        >
+          🚪
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- 送信時間 -->
+
+    <div id="date"></div>
+
 
   </div>
-  
-<div id="reactionStatus"></div>
 
-</div>
 
-<!-- 秘密のしりとり -->
-<div class="secret-area">
 
-  <div class="secret-divider"></div>
+  <script>
 
-  <div class="secret-icons">
-    <button class="secret-button" data-secret="shoe">👟</button>
-    <button class="secret-button" data-secret="milk">🍼</button>
-    <button class="secret-button" data-secret="mouse">🐹</button>
-    <button class="secret-button" data-secret="moon">🌙</button>
-  </div>
 
-  <div id="secretDoor" class="secret-door">
-    <div class="secret-moon">🌙</div>
-    <div class="secret-label">SECRET</div>
-    <button id="secretDoorButton" class="secret-door-button">🚪</button>
-  </div>
+    const PROJECT_URL =
+      "https://pwuhcajvuwoumgzcrzcu.supabase.co";
 
-</div>
 
-<!-- 送信時間 -->
-<div id="date"></div>
+    const REST_URL =
+      PROJECT_URL +
+      "/rest/v1";
 
-  <!-- 送信時間 -->
 
-  <div id="date"></div>
+    const SUPABASE_KEY =
+      "sb_publishable_xKz256OVExfMdxs0qajatw_LUtHDFSd";
 
-</div>
 
+    let currentPostId =
+      null;
 
-<script>
 
 
-const PROJECT_URL =
-  "https://pwuhcajvuwoumgzcrzcu.supabase.co";
+    /* =========================
+       最新投稿を読み込む
+    ========================= */
 
+    async function loadLatestPost() {
 
-const REST_URL =
-  PROJECT_URL +
-  "/rest/v1";
 
+      try {
 
-const SUPABASE_KEY =
-  "sb_publishable_xKz256OVExfMdxs0qajatw_LUtHDFSd";
 
+        const response =
+          await fetch(
 
-let currentPostId =
-  null;
+            REST_URL +
 
+            "/messages" +
 
-/* -------------------------
-   最新投稿を読み込む
--------------------------- */
+            "?select=id,message,photo_url,created_at,viewed_at,reaction" +
 
-async function loadLatestPost() {
+            "&order=id.desc" +
 
-  try {
+            "&limit=1",
 
-    const response =
-      await fetch(
+            {
 
-        REST_URL +
+              headers: {
 
-        "/messages" +
+                "apikey":
+                  SUPABASE_KEY,
 
-        "?select=id,message,photo_url,created_at,viewed_at,reaction" +
+                "Authorization":
+                  "Bearer " +
+                  SUPABASE_KEY
 
-        "&order=id.desc" +
-
-        "&limit=1",
-
-        {
-
-          headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY
-          }
-
-        }
-
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        "読み込みに失敗しました"
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    const messageEl =
-      document.getElementById(
-        "message"
-      );
-
-
-    const photoArea =
-      document.getElementById(
-        "photoArea"
-      );
-
-
-    const latestPhoto =
-      document.getElementById(
-        "latestPhoto"
-      );
-
-
-    const reactionArea =
-      document.getElementById(
-        "reactionArea"
-      );
-
-
-    const dateEl =
-      document.getElementById(
-        "date"
-      );
-
-
-    /* 投稿なし */
-
-    if (data.length === 0) {
-
-      messageEl
-        .classList
-        .remove(
-          "loading"
-        );
-
-
-      messageEl.textContent =
-        "まだ届いていません 💭";
-
-
-      photoArea.style.display =
-        "none";
-
-
-      reactionArea.style.display =
-        "none";
-
-
-      dateEl.textContent =
-        "";
-
-
-      return;
-
-    }
-
-
-    const post =
-      data[0];
-
-
-    currentPostId =
-      post.id;
-
-
-    /* ----------------
-       メッセージ
-    ----------------- */
-
-    messageEl
-      .classList
-      .remove(
-        "loading"
-      );
-
-
-    messageEl.textContent =
-      post.message ||
-      "";
-
-
-    /* ----------------
-       写真
-    ----------------- */
-
-    if (post.photo_url) {
-
-      latestPhoto.src =
-        post.photo_url;
-
-
-      photoArea.style.display =
-        "block";
-
-    } else {
-
-      latestPhoto
-        .removeAttribute(
-          "src"
-        );
-
-
-      photoArea.style.display =
-        "none";
-
-    }
-
-
-    /* ----------------
-       リアクション
-    ----------------- */
-
-    reactionArea.style.display =
-      "block";
-
-
-    updateReactionButtons(
-      post.reaction
-    );
-
-
-    /* ----------------
-       送信時間
-    ----------------- */
-
-    const date =
-      new Date(
-        post.created_at
-      );
-
-
-    dateEl.textContent =
-      date.toLocaleString(
-        "ja-JP",
-        {
-          year:
-            "numeric",
-
-          month:
-            "long",
-
-          day:
-            "numeric",
-
-          hour:
-            "2-digit",
-
-          minute:
-            "2-digit"
-        }
-      );
-
-
-    /* ----------------
-       初回だけ既読保存
-    ----------------- */
-
-    if (!post.viewed_at) {
-
-      await markAsViewed(
-        post.id
-      );
-
-    }
-
-
-  } catch (error) {
-
-    console.error(
-      error
-    );
-
-
-    const messageEl =
-      document.getElementById(
-        "message"
-      );
-
-
-    messageEl
-      .classList
-      .remove(
-        "loading"
-      );
-
-
-    messageEl.textContent =
-      "読み込めませんでした 🥲";
-
-  }
-
-}
-
-
-/* -------------------------
-   既読
--------------------------- */
-
-async function markAsViewed(
-  postId
-) {
-
-  try {
-
-    const response =
-      await fetch(
-
-        REST_URL +
-
-        "/messages" +
-
-        "?id=eq." +
-        postId +
-
-        "&viewed_at=is.null",
-
-        {
-
-          method:
-            "PATCH",
-
-          headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=minimal"
-          },
-
-          body:
-            JSON.stringify(
-              {
-                viewed_at:
-                  new Date()
-                    .toISOString()
               }
-            )
-        }
 
-      );
+            }
 
-
-    if (!response.ok) {
-
-      const errorText =
-        await response.text();
-
-
-      throw new Error(
-        "既読保存失敗: " +
-        errorText
-      );
-
-    }
-
-
-  } catch (error) {
-
-    console.error(
-      error
-    );
-
-  }
-
-}
-
-
-/* -------------------------
-   リアクション保存
--------------------------- */
-
-async function saveReaction(
-  reaction
-) {
-
-  if (!currentPostId) {
-
-    return;
-
-  }
-
-
-  const reactionStatus =
-    document.getElementById(
-      "reactionStatus"
-    );
-
-
-  reactionStatus.textContent =
-    "届けています…";
-
-
-  try {
-
-    const response =
-      await fetch(
-
-        REST_URL +
-
-        "/messages" +
-
-        "?id=eq." +
-        currentPostId,
-
-        {
-
-          method:
-            "PATCH",
-
-          headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=minimal"
-          },
-
-          body:
-            JSON.stringify(
-              {
-                reaction:
-                  reaction
-              }
-            )
-        }
-
-      );
-
-
-    if (!response.ok) {
-
-      const errorText =
-        await response.text();
-
-
-      throw new Error(
-        "リアクション保存失敗: " +
-        errorText
-      );
-
-    }
-
-
-    updateReactionButtons(
-      reaction
-    );
-
-
-    reactionStatus.textContent =
-      "届きました ♡";
-
-
-    setTimeout(
-      function() {
-
-        reactionStatus.textContent =
-          "";
-
-      },
-      1500
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      error
-    );
-
-
-    reactionStatus.textContent =
-      "送れませんでした 🥲";
-
-  }
-
-}
-
-
-/* -------------------------
-   選択中リアクション表示
--------------------------- */
-
-function updateReactionButtons(
-  reaction
-) {
-
-  const buttons =
-    document.querySelectorAll(
-      ".reaction-button"
-    );
-
-
-  buttons.forEach(
-    function(button) {
-
-      if (
-        button.dataset.reaction ===
-        reaction
-      ) {
-
-        button
-          .classList
-          .add(
-            "selected"
           );
 
-      } else {
 
-        button
+        if (!response.ok) {
+
+          throw new Error(
+            "読み込みに失敗しました"
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        const messageEl =
+          document.getElementById(
+            "message"
+          );
+
+
+        const photoArea =
+          document.getElementById(
+            "photoArea"
+          );
+
+
+        const latestPhoto =
+          document.getElementById(
+            "latestPhoto"
+          );
+
+
+        const reactionArea =
+          document.getElementById(
+            "reactionArea"
+          );
+
+
+        const dateEl =
+          document.getElementById(
+            "date"
+          );
+
+
+        /* 投稿なし */
+
+        if (data.length === 0) {
+
+
+          messageEl
+            .classList
+            .remove(
+              "loading"
+            );
+
+
+          messageEl.textContent =
+            "まだ届いていません 💭";
+
+
+          photoArea.style.display =
+            "none";
+
+
+          reactionArea.style.display =
+            "none";
+
+
+          dateEl.textContent =
+            "";
+
+
+          return;
+
+        }
+
+
+        const post =
+          data[0];
+
+
+        currentPostId =
+          post.id;
+
+
+
+        /* メッセージ */
+
+        messageEl
           .classList
           .remove(
-            "selected"
+            "loading"
           );
 
-      }
 
-    }
-  );
-
-}
+        messageEl.textContent =
+          post.message ||
+          "";
 
 
-/* -------------------------
-   ボタン操作
--------------------------- */
 
-document
-  .querySelectorAll(
-    ".reaction-button"
-  )
-  .forEach(
-    function(button) {
+        /* 写真 */
 
-      button.addEventListener(
-        "click",
-        function() {
+        if (post.photo_url) {
 
-          saveReaction(
-            button.dataset.reaction
+
+          latestPhoto.src =
+            post.photo_url;
+
+
+          photoArea.style.display =
+            "block";
+
+
+        } else {
+
+
+          latestPhoto
+            .removeAttribute(
+              "src"
+            );
+
+
+          photoArea.style.display =
+            "none";
+
+
+        }
+
+
+
+        /* リアクション */
+
+        reactionArea.style.display =
+          "block";
+
+
+        updateReactionButtons(
+          post.reaction
+        );
+
+
+
+        /* 日時 */
+
+        const date =
+          new Date(
+            post.created_at
+          );
+
+
+        dateEl.textContent =
+          date.toLocaleString(
+            "ja-JP",
+            {
+
+              year:
+                "numeric",
+
+              month:
+                "long",
+
+              day:
+                "numeric",
+
+              hour:
+                "2-digit",
+
+              minute:
+                "2-digit"
+
+            }
+          );
+
+
+
+        /* 初回だけ既読 */
+
+        if (!post.viewed_at) {
+
+          await markAsViewed(
+            post.id
           );
 
         }
-      );
-
-    }
-  );
 
 
-/* -------------------------
-   最初に読み込む
--------------------------- */
+      } catch (error) {
 
-loadLatestPost();
 
-/* ===== 秘密のしりとり ===== */
+        console.error(
+          error
+        );
 
-const secretAnswer = [
-  "mouse",
-  "milk",
-  "shoe",
-  "moon"
-];
 
-let secretStep = 0;
+        const messageEl =
+          document.getElementById(
+            "message"
+          );
 
-const secretButtons =
-  document.querySelectorAll(".secret-button");
 
-const secretDoor =
-  document.getElementById("secretDoor");
+        messageEl
+          .classList
+          .remove(
+            "loading"
+          );
 
-secretButtons.forEach(button => {
 
-  button.addEventListener("click", () => {
+        messageEl.textContent =
+          "読み込めませんでした 🥲";
 
-    const value =
-      button.dataset.secret;
-
-    if (value === secretAnswer[secretStep]) {
-
-      button.classList.add("correct");
-
-      secretStep++;
-
-      if (secretStep === secretAnswer.length) {
-
-        setTimeout(() => {
-
-          secretDoor.classList.add("open");
-
-        }, 500);
 
       }
 
-    } else {
-
-      button.classList.add("wrong");
-
-      setTimeout(() => {
-
-        button.classList.remove("wrong");
-
-      }, 300);
-
-      secretStep = 0;
-
-      secretButtons.forEach(btn => {
-
-        btn.classList.remove("correct");
-
-      });
 
     }
 
-  });
 
-});
-  
-</script>
+
+    /* =========================
+       既読保存
+    ========================= */
+
+    async function markAsViewed(
+      postId
+    ) {
+
+
+      try {
+
+
+        const response =
+          await fetch(
+
+            REST_URL +
+
+            "/messages" +
+
+            "?id=eq." +
+            postId +
+
+            "&viewed_at=is.null",
+
+            {
+
+              method:
+                "PATCH",
+
+              headers: {
+
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  "Bearer " +
+                  SUPABASE_KEY,
+
+                "Content-Type":
+                  "application/json",
+
+                "Prefer":
+                  "return=minimal"
+
+              },
+
+              body:
+                JSON.stringify(
+                  {
+
+                    viewed_at:
+                      new Date()
+                        .toISOString()
+
+                  }
+                )
+
+            }
+
+          );
+
+
+        if (!response.ok) {
+
+
+          const errorText =
+            await response.text();
+
+
+          throw new Error(
+            "既読保存失敗: " +
+            errorText
+          );
+
+
+        }
+
+
+      } catch (error) {
+
+
+        console.error(
+          error
+        );
+
+
+      }
+
+
+    }
+
+
+
+    /* =========================
+       リアクション保存
+    ========================= */
+
+    async function saveReaction(
+      reaction
+    ) {
+
+
+      if (!currentPostId) {
+
+        return;
+
+      }
+
+
+      const reactionStatus =
+        document.getElementById(
+          "reactionStatus"
+        );
+
+
+      reactionStatus.textContent =
+        "届けています…";
+
+
+      try {
+
+
+        const response =
+          await fetch(
+
+            REST_URL +
+
+            "/messages" +
+
+            "?id=eq." +
+            currentPostId,
+
+            {
+
+              method:
+                "PATCH",
+
+              headers: {
+
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  "Bearer " +
+                  SUPABASE_KEY,
+
+                "Content-Type":
+                  "application/json",
+
+                "Prefer":
+                  "return=minimal"
+
+              },
+
+              body:
+                JSON.stringify(
+                  {
+
+                    reaction:
+                      reaction
+
+                  }
+                )
+
+            }
+
+          );
+
+
+        if (!response.ok) {
+
+
+          const errorText =
+            await response.text();
+
+
+          throw new Error(
+            "リアクション保存失敗: " +
+            errorText
+          );
+
+
+        }
+
+
+        updateReactionButtons(
+          reaction
+        );
+
+
+        reactionStatus.textContent =
+          "届きました ♡";
+
+
+        setTimeout(
+
+          function() {
+
+            reactionStatus.textContent =
+              "";
+
+          },
+
+          1500
+
+        );
+
+
+      } catch (error) {
+
+
+        console.error(
+          error
+        );
+
+
+        reactionStatus.textContent =
+          "送れませんでした 🥲";
+
+
+      }
+
+
+    }
+
+
+
+    /* =========================
+       選択中リアクション
+    ========================= */
+
+    function updateReactionButtons(
+      reaction
+    ) {
+
+
+      const buttons =
+        document.querySelectorAll(
+          ".reaction-button"
+        );
+
+
+      buttons.forEach(
+
+        function(button) {
+
+
+          if (
+            button.dataset.reaction ===
+            reaction
+          ) {
+
+
+            button
+              .classList
+              .add(
+                "selected"
+              );
+
+
+          } else {
+
+
+            button
+              .classList
+              .remove(
+                "selected"
+              );
+
+
+          }
+
+
+        }
+
+      );
+
+
+    }
+
+
+
+    /* リアクションボタン */
+
+    document
+      .querySelectorAll(
+        ".reaction-button"
+      )
+      .forEach(
+
+        function(button) {
+
+
+          button.addEventListener(
+
+            "click",
+
+            function() {
+
+
+              saveReaction(
+                button.dataset.reaction
+              );
+
+
+            }
+
+          );
+
+
+        }
+
+      );
+
+
+
+    /* =========================
+       秘密のしりとり
+    ========================= */
+
+
+    /*
+      正解
+
+      🐹 ねずみ
+          ↓
+      🍼 みるく
+          ↓
+      👟 くつ
+          ↓
+      🌙 つき
+    */
+
+
+    const secretAnswer = [
+
+      "mouse",
+      "milk",
+      "shoe",
+      "moon"
+
+    ];
+
+
+    let secretStep =
+      0;
+
+
+    const secretButtons =
+      document.querySelectorAll(
+        ".secret-button"
+      );
+
+
+    const secretDoor =
+      document.getElementById(
+        "secretDoor"
+      );
+
+
+    secretButtons.forEach(
+
+      function(button) {
+
+
+        button.addEventListener(
+
+          "click",
+
+          function() {
+
+
+            const value =
+              button.dataset.secret;
+
+
+
+            /* 正解 */
+
+            if (
+              value ===
+              secretAnswer[
+                secretStep
+              ]
+            ) {
+
+
+              button
+                .classList
+                .add(
+                  "correct"
+                );
+
+
+              secretStep++;
+
+
+
+              /* 全部正解 */
+
+              if (
+                secretStep ===
+                secretAnswer.length
+              ) {
+
+
+                setTimeout(
+
+                  function() {
+
+
+                    secretDoor
+                      .classList
+                      .add(
+                        "open"
+                      );
+
+
+                  },
+
+                  450
+
+                );
+
+
+              }
+
+
+            }
+
+
+            /* 間違い */
+
+            else {
+
+
+              button
+                .classList
+                .add(
+                  "wrong"
+                );
+
+
+              setTimeout(
+
+                function() {
+
+
+                  button
+                    .classList
+                    .remove(
+                      "wrong"
+                    );
+
+
+                },
+
+                300
+
+              );
+
+
+              secretStep =
+                0;
+
+
+              secretButtons.forEach(
+
+                function(btn) {
+
+
+                  btn
+                    .classList
+                    .remove(
+                      "correct"
+                    );
+
+
+                }
+
+              );
+
+
+            }
+
+
+          }
+
+        );
+
+
+      }
+
+    );
+
+
+
+    /* 最初に読み込む */
+
+    loadLatestPost();
+
+
+  </script>
 
 
 </body>
+
 </html>
