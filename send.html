@@ -13,9 +13,6 @@
     body {
       margin: 0;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 24px;
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
                    "Noto Sans JP", sans-serif;
@@ -28,6 +25,7 @@
     .card {
       width: 100%;
       max-width: 430px;
+      margin: 20px auto;
       background: rgba(255,255,255,0.94);
       border-radius: 28px;
       padding: 34px 24px;
@@ -76,13 +74,21 @@
       display: none;
     }
 
+    #previewTitle {
+      display: none;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
     #preview {
       display: none;
       width: 100%;
       max-height: 360px;
       object-fit: cover;
       border-radius: 20px;
-      margin-top: 18px;
+      margin-top: 10px;
     }
 
     #sendButton {
@@ -106,6 +112,86 @@
       min-height: 20px;
       color: #999;
       font-size: 14px;
+    }
+
+    .section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #f1e4e9;
+    }
+
+    .section-title {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 14px;
+    }
+
+    #currentPost {
+      display: none;
+    }
+
+    #currentMessage {
+      font-size: 17px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    #currentPhoto {
+      display: none;
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-top: 16px;
+    }
+
+    #currentDate {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .history-item {
+      padding: 18px 0;
+      border-bottom: 1px solid #f3e7eb;
+      text-align: left;
+    }
+
+    .history-message {
+      font-size: 15px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .history-photo {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-top: 12px;
+    }
+
+    .history-date {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    .delete-button {
+      margin-top: 12px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 999px;
+      background: #fff0f3;
+      color: #c77c92;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .delete-button:disabled {
+      opacity: 0.5;
     }
   </style>
 </head>
@@ -133,7 +219,11 @@
       accept="image/*"
     >
 
-    <img id="preview">
+    <div id="previewTitle">
+      今回届ける写真
+    </div>
+
+    <img id="preview" alt="preview">
 
   </div>
 
@@ -142,47 +232,39 @@
   </button>
 
   <div id="status"></div>
-  
-<div id="currentPost" style="
-  margin-top:32px;
-  padding-top:24px;
-  border-top:1px solid #f1e4e9;
-  display:none;
-">
 
-  <div style="
-    font-size:13px;
-    color:#aaa;
-    margin-bottom:14px;
-  ">
-    今届けているもの
+
+  <!-- 今届けているもの -->
+
+  <div id="currentPost" class="section">
+
+    <div class="section-title">
+      今届けているもの
+    </div>
+
+    <div id="currentMessage"></div>
+
+    <img id="currentPhoto" alt="current photo">
+
+    <div id="currentDate"></div>
+
   </div>
 
-  <div id="currentMessage" style="
-    font-size:17px;
-    line-height:1.7;
-    white-space:pre-wrap;
-  "></div>
 
-  <img
-    id="currentPhoto"
-    style="
-      display:none;
-      width:100%;
-      max-height:360px;
-      object-fit:cover;
-      border-radius:20px;
-      margin-top:16px;
-    "
-  >
+  <!-- 履歴 -->
 
-  <div id="currentDate" style="
-    margin-top:14px;
-    font-size:12px;
-    color:#aaa;
-  "></div>
+  <div id="historySection" class="section">
 
-</div>
+    <div class="section-title">
+      これまで届けたもの
+    </div>
+
+    <div id="historyList">
+      読み込んでいます…
+    </div>
+
+  </div>
+
 </div>
 
 
@@ -202,32 +284,86 @@ const SUPABASE_KEY =
 
 const BUCKET = "photos";
 
+
+const messageInput =
+  document.getElementById("messageInput");
+
+const photoInput =
+  document.getElementById("photoInput");
+
+const preview =
+  document.getElementById("preview");
+
+const previewTitle =
+  document.getElementById("previewTitle");
+
+const sendButton =
+  document.getElementById("sendButton");
+
+const status =
+  document.getElementById("status");
+
+
+/* -------------------------
+   写真プレビュー
+-------------------------- */
+
+photoInput.addEventListener("change", function () {
+
+  const file =
+    photoInput.files[0];
+
+  if (!file) {
+
+    preview.style.display =
+      "none";
+
+    previewTitle.style.display =
+      "none";
+
+    return;
+  }
+
+  preview.src =
+    URL.createObjectURL(file);
+
+  preview.style.display =
+    "block";
+
+  previewTitle.style.display =
+    "block";
+
+});
+
+
+/* -------------------------
+   今届けているもの
+-------------------------- */
+
 async function loadCurrentPost() {
 
   try {
 
     const response = await fetch(
       REST_URL +
-      "/messages?select=message,photo_url,created_at&order=id.desc&limit=1",
+      "/messages?select=id,message,photo_url,created_at&order=id.desc&limit=1",
       {
         headers: {
           "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
+          "Authorization":
+            "Bearer " + SUPABASE_KEY
         }
       }
     );
 
     if (!response.ok) {
-      throw new Error("最新投稿を取得できませんでした");
+      throw new Error(
+        "最新投稿を取得できませんでした"
+      );
     }
 
-    const data = await response.json();
-
-    if (data.length === 0) {
-      return;
-    }
-
-    const post = data[0];
+    const data =
+      await response.json();
 
     const currentPost =
       document.getElementById("currentPost");
@@ -242,17 +378,25 @@ async function loadCurrentPost() {
       document.getElementById("currentDate");
 
 
+    if (data.length === 0) {
+
+      currentPost.style.display =
+        "none";
+
+      return;
+    }
+
+
+    const post =
+      data[0];
+
     currentPost.style.display =
       "block";
 
 
-    /* メッセージ */
-
     currentMessage.textContent =
       post.message || "";
 
-
-    /* 写真 */
 
     if (post.photo_url) {
 
@@ -271,8 +415,6 @@ async function loadCurrentPost() {
 
     }
 
-
-    /* 時間 */
 
     const date =
       new Date(post.created_at);
@@ -293,210 +435,523 @@ async function loadCurrentPost() {
   }
 
 }
-const messageInput =
-  document.getElementById("messageInput");
-
-const photoInput =
-  document.getElementById("photoInput");
-
-const preview =
-  document.getElementById("preview");
-
-const sendButton =
-  document.getElementById("sendButton");
-
-const status =
-  document.getElementById("status");
 
 
-/* 写真プレビュー */
+/* -------------------------
+   履歴
+-------------------------- */
 
-photoInput.addEventListener("change", function () {
-
-  const file = photoInput.files[0];
-
-  if (!file) {
-
-    preview.style.display = "none";
-
-    return;
-  }
-
-  preview.src =
-    URL.createObjectURL(file);
-
-  preview.style.display =
-    "block";
-
-  document.getElementById("previewTitle").style.display =
-  "block";
-});
-
-
-/* 届ける */
-
-sendButton.addEventListener("click", async function () {
-
-  const message =
-    messageInput.value.trim();
-
-  const file =
-    photoInput.files[0];
-
-
-  if (!message && !file) {
-
-    status.textContent =
-      "メッセージか写真を選んでね 💭";
-
-    return;
-  }
-
-
-  sendButton.disabled = true;
-
-  status.textContent =
-    "届けています… 💌";
-
+async function loadHistory() {
 
   try {
 
-/* -----------------
-   写真を先にアップロード
------------------- */
-
-let photoUrl = null;
-
-if (file) {
-
-  const extension =
-    file.name.includes(".")
-      ? file.name.split(".").pop()
-      : "jpg";
-
-  const fileName =
-    Date.now() + "." + extension;
-
-  const photoResponse =
-    await fetch(
-      STORAGE_URL +
-      "/object/" +
-      BUCKET +
-      "/" +
-      fileName,
+    const response = await fetch(
+      REST_URL +
+      "/messages?select=id,message,photo_url,created_at&order=id.desc&limit=50",
       {
-        method: "POST",
-
         headers: {
           "apikey": SUPABASE_KEY,
-
           "Authorization":
-            "Bearer " + SUPABASE_KEY,
-
-          "Content-Type":
-            file.type || "image/jpeg",
-
-          "x-upsert": "false"
-        },
-
-        body: file
+            "Bearer " + SUPABASE_KEY
+        }
       }
     );
 
-  if (!photoResponse.ok) {
-
-    const errorText =
-      await photoResponse.text();
-
-    throw new Error(
-      "写真送信失敗: " + errorText
-    );
-  }
-
-  photoUrl =
-    STORAGE_URL +
-    "/object/public/" +
-    BUCKET +
-    "/" +
-    encodeURIComponent(fileName);
-}
-
-
-/* -----------------
-   メッセージ＋写真URLを
-   1セットで保存
------------------- */
-
-const messageResponse =
-  await fetch(
-    REST_URL + "/messages",
-    {
-      method: "POST",
-
-      headers: {
-        "apikey": SUPABASE_KEY,
-
-        "Authorization":
-          "Bearer " + SUPABASE_KEY,
-
-        "Content-Type":
-          "application/json",
-
-        "Prefer":
-          "return=minimal"
-      },
-
-      body: JSON.stringify({
-        message: message || "",
-        photo_url: photoUrl
-      })
+    if (!response.ok) {
+      throw new Error(
+        "履歴を取得できませんでした"
+      );
     }
-  );
 
-if (!messageResponse.ok) {
 
-  const errorText =
-    await messageResponse.text();
+    const posts =
+      await response.json();
 
-  throw new Error(
-    "メッセージ送信失敗: " +
-    errorText
-  );
-}              
+    const historyList =
+      document.getElementById("historyList");
 
-  status.textContent = "届きました 💌♡";
+    historyList.innerHTML =
+      "";
 
-await loadCurrentPost();
-    
-messageInput.value = "";
-photoInput.value = "";
 
-preview.style.display = "none";
+    if (posts.length === 0) {
 
-const previewTitle =
-  document.getElementById("previewTitle");
+      historyList.textContent =
+        "まだ履歴はありません";
 
-if (previewTitle) {
-  previewTitle.style.display = "none";
-}
+      return;
+    }
+
+
+    posts.forEach(function(post) {
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "history-item";
+
+
+      if (post.message) {
+
+        const message =
+          document.createElement("div");
+
+        message.className =
+          "history-message";
+
+        message.textContent =
+          post.message;
+
+        item.appendChild(message);
+
+      }
+
+
+      if (post.photo_url) {
+
+        const img =
+          document.createElement("img");
+
+        img.className =
+          "history-photo";
+
+        img.src =
+          post.photo_url;
+
+        item.appendChild(img);
+
+      }
+
+
+      const date =
+        new Date(post.created_at);
+
+      const dateText =
+        document.createElement("div");
+
+      dateText.className =
+        "history-date";
+
+      dateText.textContent =
+        date.toLocaleString("ja-JP", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+      item.appendChild(dateText);
+
+
+      const deleteButton =
+        document.createElement("button");
+
+      deleteButton.className =
+        "delete-button";
+
+      deleteButton.textContent =
+        "削除";
+
+      deleteButton.addEventListener(
+        "click",
+        async function() {
+
+          const ok =
+            confirm(
+              "この投稿を削除する？"
+            );
+
+          if (!ok) {
+            return;
+          }
+
+          deleteButton.disabled =
+            true;
+
+          deleteButton.textContent =
+            "削除中…";
+
+          await deletePost(post);
+
+        }
+      );
+
+
+      item.appendChild(
+        deleteButton
+      );
+
+      historyList.appendChild(
+        item
+      );
+
+    });
 
   } catch (error) {
 
     console.error(error);
 
-    status.textContent =
-     "エラー：" + error.message;
-
-  } finally {
-
-    sendButton.disabled = false;
+    document.getElementById(
+      "historyList"
+    ).textContent =
+      "履歴を読み込めませんでした 🥲";
 
   }
 
-});
-  
+}
+
+
+/* -------------------------
+   投稿削除
+-------------------------- */
+
+async function deletePost(post) {
+
+  try {
+
+    /*
+      写真付きならStorageからも削除
+    */
+
+    if (post.photo_url) {
+
+      const marker =
+        "/storage/v1/object/public/photos/";
+
+      const position =
+        post.photo_url.indexOf(marker);
+
+
+      if (position !== -1) {
+
+        const fileName =
+          decodeURIComponent(
+            post.photo_url.substring(
+              position +
+              marker.length
+            )
+          );
+
+
+        const photoDeleteResponse =
+          await fetch(
+            STORAGE_URL +
+            "/object/" +
+            BUCKET +
+            "/" +
+            encodeURIComponent(fileName),
+            {
+              method: "DELETE",
+
+              headers: {
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  "Bearer " +
+                  SUPABASE_KEY
+              }
+            }
+          );
+
+
+        if (!photoDeleteResponse.ok) {
+
+          const errorText =
+            await photoDeleteResponse.text();
+
+          throw new Error(
+            "写真削除失敗: " +
+            errorText
+          );
+
+        }
+
+      }
+
+    }
+
+
+    /*
+      messagesから削除
+    */
+
+    const messageDeleteResponse =
+      await fetch(
+        REST_URL +
+        "/messages?id=eq." +
+        post.id,
+        {
+          method: "DELETE",
+
+          headers: {
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+          }
+        }
+      );
+
+
+    if (!messageDeleteResponse.ok) {
+
+      const errorText =
+        await messageDeleteResponse.text();
+
+      throw new Error(
+        "投稿削除失敗: " +
+        errorText
+      );
+
+    }
+
+
+    await loadCurrentPost();
+
+    await loadHistory();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "削除に失敗しました 🥲"
+    );
+
+    await loadHistory();
+
+  }
+
+}
+
+
+/* -------------------------
+   届ける
+-------------------------- */
+
+sendButton.addEventListener(
+  "click",
+  async function() {
+
+    const message =
+      messageInput.value.trim();
+
+    const file =
+      photoInput.files[0];
+
+
+    if (!message && !file) {
+
+      status.textContent =
+        "メッセージか写真を選んでね 💭";
+
+      return;
+
+    }
+
+
+    sendButton.disabled =
+      true;
+
+    status.textContent =
+      "届けています… 💌";
+
+
+    let photoUrl =
+      null;
+
+    let uploadedFileName =
+      null;
+
+
+    try {
+
+      /*
+        写真があれば先にアップロード
+      */
+
+      if (file) {
+
+        const extension =
+          file.name.includes(".")
+            ? file.name
+                .split(".")
+                .pop()
+            : "jpg";
+
+
+        uploadedFileName =
+          Date.now() +
+          "." +
+          extension;
+
+
+        const photoResponse =
+          await fetch(
+            STORAGE_URL +
+            "/object/" +
+            BUCKET +
+            "/" +
+            uploadedFileName,
+            {
+              method: "POST",
+
+              headers: {
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  "Bearer " +
+                  SUPABASE_KEY,
+
+                "Content-Type":
+                  file.type ||
+                  "image/jpeg",
+
+                "x-upsert":
+                  "false"
+              },
+
+              body: file
+            }
+          );
+
+
+        if (!photoResponse.ok) {
+
+          const errorText =
+            await photoResponse.text();
+
+          throw new Error(
+            "写真送信失敗: " +
+            errorText
+          );
+
+        }
+
+
+        photoUrl =
+          STORAGE_URL +
+          "/object/public/" +
+          BUCKET +
+          "/" +
+          encodeURIComponent(
+            uploadedFileName
+          );
+
+      }
+
+
+      /*
+        メッセージと写真URLを
+        1セットで保存
+      */
+
+      const messageResponse =
+        await fetch(
+          REST_URL +
+          "/messages",
+          {
+            method: "POST",
+
+            headers: {
+              "apikey":
+                SUPABASE_KEY,
+
+              "Authorization":
+                "Bearer " +
+                SUPABASE_KEY,
+
+              "Content-Type":
+                "application/json",
+
+              "Prefer":
+                "return=minimal"
+            },
+
+            body:
+              JSON.stringify({
+                message:
+                  message || "",
+
+                photo_url:
+                  photoUrl
+              })
+          }
+        );
+
+
+      if (!messageResponse.ok) {
+
+        const errorText =
+          await messageResponse.text();
+
+        throw new Error(
+          "メッセージ送信失敗: " +
+          errorText
+        );
+
+      }
+
+
+      status.textContent =
+        "届きました 💌♡";
+
+
+      messageInput.value =
+        "";
+
+      photoInput.value =
+        "";
+
+      preview.style.display =
+        "none";
+
+      preview.removeAttribute(
+        "src"
+      );
+
+      previewTitle.style.display =
+        "none";
+
+
+      await loadCurrentPost();
+
+      await loadHistory();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      status.textContent =
+        "エラー：" +
+        error.message;
+
+    } finally {
+
+      sendButton.disabled =
+        false;
+
+    }
+
+  }
+);
+
+
+/* -------------------------
+   ページを開いた時
+-------------------------- */
+
 loadCurrentPost();
-  
+loadHistory();
+
 </script>
 
 </body>
