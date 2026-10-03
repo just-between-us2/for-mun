@@ -1337,6 +1337,10 @@ function escapeHtml(text) {
 loadCurrentPost();
 loadHistory();
 
+setInterval(function () {
+  loadCurrentPost();
+}, 5000);
+
 
 </script>
 
