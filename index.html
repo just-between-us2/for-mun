@@ -2,7 +2,6 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -25,8 +24,8 @@
       min-height: 100vh;
 
       padding:
-        28px 20px
-        60px;
+        18px 16px
+        50px;
 
       font-family:
         -apple-system,
@@ -35,88 +34,65 @@
         "Noto Sans JP",
         sans-serif;
 
-      color: #3d3440;
+      color: #3b3340;
 
       background:
         radial-gradient(
-          circle at 10% 10%,
-          rgba(255,255,255,0.8),
-          transparent 24%
+          circle at 10% 8%,
+          rgba(255,255,255,0.92),
+          transparent 23%
         ),
         radial-gradient(
-          circle at 85% 12%,
-          rgba(255,220,238,0.8),
+          circle at 90% 16%,
+          rgba(255,217,238,0.75),
           transparent 28%
+        ),
+        radial-gradient(
+          circle at 50% 80%,
+          rgba(234,220,255,0.5),
+          transparent 35%
         ),
         linear-gradient(
           165deg,
-          #fff7fb 0%,
-          #fce7f1 38%,
-          #f6d8ea 68%,
-          #eadcf7 100%
+          #fff9fc 0%,
+          #fceaf3 40%,
+          #f6ddeb 72%,
+          #eadff7 100%
         );
 
       overflow-x: hidden;
     }
 
 
-    /* -------------------------
-       星空
-    -------------------------- */
-
     body::before {
       content: "✦";
 
       position: fixed;
+
       top: 8%;
-      left: 8%;
+      left: 7%;
 
       color:
-        rgba(175,145,220,0.45);
+        rgba(170,145,220,0.45);
 
-      font-size: 14px;
+      font-size: 12px;
 
       pointer-events: none;
 
       z-index: 0;
 
       text-shadow:
-
-        56px 90px 0
-        rgba(255,255,255,0.8),
-
-        130px 28px 0
-        rgba(181,150,225,0.45),
-
-        220px 110px 0
-        rgba(255,255,255,0.75),
-
-        300px 35px 0
-        rgba(190,155,225,0.5),
-
-        32px 245px 0
-        rgba(255,255,255,0.8),
-
-        145px 330px 0
-        rgba(185,150,225,0.42),
-
-        285px 270px 0
-        rgba(255,255,255,0.8),
-
-        75px 500px 0
-        rgba(185,150,225,0.4),
-
-        230px 580px 0
-        rgba(255,255,255,0.8),
-
-        320px 700px 0
-        rgba(180,145,220,0.45),
-
-        30px 820px 0
-        rgba(255,255,255,0.75),
-
-        190px 920px 0
-        rgba(180,145,220,0.4);
+        52px 70px 0 rgba(255,255,255,0.85),
+        115px 18px 0 rgba(185,155,225,0.4),
+        205px 88px 0 rgba(255,255,255,0.8),
+        290px 32px 0 rgba(180,145,220,0.45),
+        28px 215px 0 rgba(255,255,255,0.8),
+        135px 285px 0 rgba(185,150,225,0.4),
+        270px 250px 0 rgba(255,255,255,0.8),
+        70px 430px 0 rgba(180,145,220,0.4),
+        225px 510px 0 rgba(255,255,255,0.8),
+        305px 650px 0 rgba(180,145,220,0.4),
+        40px 780px 0 rgba(255,255,255,0.8);
     }
 
 
@@ -125,16 +101,16 @@
 
       position: fixed;
 
-      top: 8%;
+      top: 7%;
       right: 8%;
 
       color:
-        rgba(255,255,255,0.85);
+        rgba(255,255,255,0.88);
 
-      font-size: 48px;
+      font-size: 42px;
 
       text-shadow:
-        0 0 18px
+        0 0 16px
         rgba(255,255,255,0.7);
 
       pointer-events: none;
@@ -147,16 +123,16 @@
       position: fixed;
 
       top: 18%;
-      left: 14%;
+      left: 15%;
 
-      width: 72px;
+      width: 62px;
       height: 1px;
 
       background:
         linear-gradient(
           90deg,
           transparent,
-          rgba(177,145,220,0.6)
+          rgba(175,145,220,0.58)
         );
 
       transform:
@@ -164,9 +140,9 @@
 
       border-radius: 999px;
 
-      z-index: 0;
-
       pointer-events: none;
+
+      z-index: 0;
     }
 
 
@@ -176,12 +152,12 @@
       position: absolute;
 
       right: -2px;
-      top: -8px;
+      top: -7px;
 
-      font-size: 13px;
+      font-size: 12px;
 
       color:
-        rgba(177,145,220,0.7);
+        rgba(170,140,220,0.65);
     }
 
 
@@ -200,82 +176,77 @@
 
     .title {
       margin:
-        18px 0
-        24px;
+        4px 0
+        4px;
 
       text-align: center;
 
-      font-size: 26px;
+      font-size: 24px;
 
-      font-weight: 600;
+      font-weight: 650;
 
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
     }
 
 
     .subtitle {
-      margin-top: -14px;
-      margin-bottom: 28px;
+      margin-bottom: 12px;
 
       text-align: center;
 
-      font-size: 12px;
+      font-size: 11px;
 
       color:
-        rgba(90,70,95,0.5);
+        rgba(95,75,100,0.48);
     }
 
-
-    /* -------------------------
-       共通カード
-    -------------------------- */
 
     .card {
       width: 100%;
 
-      margin-bottom: 22px;
+      margin-bottom: 12px;
 
       padding:
-        30px 22px;
+        18px 16px;
 
       border:
         1px solid
-        rgba(255,255,255,0.75);
+        rgba(255,255,255,0.8);
 
-      border-radius: 30px;
+      border-radius: 25px;
 
       background:
-        rgba(255,255,255,0.78);
+        rgba(255,255,255,0.80);
 
       backdrop-filter:
-        blur(15px);
+        blur(14px);
 
       -webkit-backdrop-filter:
-        blur(15px);
+        blur(14px);
 
       box-shadow:
-        0 15px 45px
-        rgba(178,105,145,0.14);
+        0 12px 34px
+        rgba(178,105,145,0.12);
     }
 
 
     .card-title {
-      margin-bottom: 7px;
+      margin-bottom: 2px;
 
       text-align: center;
 
-      font-size: 22px;
+      font-size: 18px;
 
       font-weight: 700;
     }
 
 
     .card-subtitle {
-      margin-bottom: 24px;
+      margin-bottom: 10px;
 
       text-align: center;
 
-      font-size: 12px;
+      font-size: 10px;
 
       color: #aaa;
     }
@@ -287,20 +258,20 @@
 
     #receivedMessage {
       padding:
-        20px 16px;
+        12px 10px;
 
       border:
         1px solid
         rgba(234,182,200,0.5);
 
-      border-radius: 22px;
+      border-radius: 17px;
 
       background:
-        rgba(255,246,250,0.8);
+        rgba(255,248,251,0.82);
 
-      font-size: 20px;
+      font-size: 17px;
 
-      line-height: 1.8;
+      line-height: 1.5;
 
       text-align: center;
 
@@ -311,7 +282,7 @@
 
 
     .loading {
-      font-size: 15px !important;
+      font-size: 13px !important;
 
       color: #aaa;
     }
@@ -320,46 +291,31 @@
     #receivedPhotoArea {
       display: none;
 
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
 
     #receivedPhoto {
       width: 100%;
 
-      max-height: 420px;
+      max-height: 250px;
 
       object-fit: cover;
 
-      border-radius: 22px;
+      border-radius: 16px;
 
       box-shadow:
-        0 8px 25px
-        rgba(150,100,120,0.13);
+        0 6px 18px
+        rgba(150,100,120,0.12);
     }
 
-
-    #receivedDate {
-      margin-top: 15px;
-
-      text-align: center;
-
-      font-size: 12px;
-
-      color: #aaa;
-    }
-
-
-    /* -------------------------
-       リアクション
-    -------------------------- */
 
     #reactionArea {
       display: none;
 
-      margin-top: 24px;
+      margin-top: 10px;
 
-      padding-top: 20px;
+      padding-top: 10px;
 
       border-top:
         1px solid
@@ -368,11 +324,11 @@
 
 
     .reaction-title {
-      margin-bottom: 13px;
+      margin-bottom: 7px;
 
       text-align: center;
 
-      font-size: 12px;
+      font-size: 10px;
 
       color: #aaa;
     }
@@ -383,15 +339,15 @@
 
       justify-content: center;
 
-      gap: 12px;
+      gap: 8px;
 
       flex-wrap: wrap;
     }
 
 
     .reaction-button {
-      width: 54px;
-      height: 54px;
+      width: 42px;
+      height: 42px;
 
       border: none;
 
@@ -400,7 +356,7 @@
       background:
         rgba(255,239,246,0.95);
 
-      font-size: 24px;
+      font-size: 20px;
 
       cursor: pointer;
 
@@ -417,49 +373,55 @@
 
 
     .reaction-button.selected {
-      background: #f7cfdf;
+      background: #f5c9da;
 
-      transform:
-        scale(1.08);
+      transform: scale(1.06);
 
       box-shadow:
-        0 0 18px
-        rgba(231,155,187,0.35);
+        0 0 14px
+        rgba(231,155,187,0.30);
     }
 
 
     #reactionStatus {
-      min-height: 18px;
+      min-height: 14px;
 
-      margin-top: 11px;
+      margin-top: 6px;
 
       text-align: center;
 
-      font-size: 12px;
+      font-size: 10px;
 
       color: #aaa;
     }
 
 
-    /* -------------------------
-       区切り
-    -------------------------- */
+    #receivedDate {
+      margin-top: 7px;
+
+      text-align: center;
+
+      font-size: 10px;
+
+      color: #aaa;
+    }
+
 
     .divider {
       display: flex;
 
       align-items: center;
 
-      gap: 12px;
+      gap: 8px;
 
       margin:
-        8px 4px
-        22px;
+        2px 4px
+        10px;
 
       color:
-        rgba(155,110,145,0.7);
+        rgba(155,110,145,0.65);
 
-      font-size: 11px;
+      font-size: 10px;
 
       white-space: nowrap;
     }
@@ -474,26 +436,26 @@
       flex: 1;
 
       background:
-        rgba(200,160,185,0.35);
+        rgba(200,160,185,0.32);
     }
 
 
     /* -------------------------
-       送信
+       届ける
     -------------------------- */
 
     textarea {
       width: 100%;
 
-      min-height: 135px;
+      min-height: 78px;
 
-      padding: 17px;
+      padding: 12px;
 
       border:
         1px solid
         #efd4df;
 
-      border-radius: 22px;
+      border-radius: 17px;
 
       resize: vertical;
 
@@ -502,9 +464,9 @@
       background:
         rgba(255,249,252,0.9);
 
-      font-size: 16px;
+      font-size: 15px;
 
-      line-height: 1.7;
+      line-height: 1.5;
 
       font-family: inherit;
 
@@ -513,17 +475,16 @@
 
 
     textarea:focus {
-      border-color:
-        #e6acc3;
+      border-color: #e6acc3;
 
       box-shadow:
         0 0 0 3px
-        rgba(235,180,202,0.12);
+        rgba(235,180,202,0.10);
     }
 
 
     .photo-area {
-      margin-top: 20px;
+      margin-top: 10px;
 
       text-align: center;
     }
@@ -533,7 +494,7 @@
       display: inline-block;
 
       padding:
-        12px 20px;
+        9px 15px;
 
       border-radius: 999px;
 
@@ -542,7 +503,7 @@
 
       cursor: pointer;
 
-      font-size: 15px;
+      font-size: 13px;
     }
 
 
@@ -554,9 +515,9 @@
     #previewTitle {
       display: none;
 
-      margin-top: 17px;
+      margin-top: 10px;
 
-      font-size: 12px;
+      font-size: 10px;
 
       color: #aaa;
     }
@@ -567,22 +528,22 @@
 
       width: 100%;
 
-      max-height: 370px;
+      max-height: 240px;
 
       object-fit: cover;
 
-      margin-top: 10px;
+      margin-top: 8px;
 
-      border-radius: 20px;
+      border-radius: 16px;
     }
 
 
     #sendButton {
       width: 100%;
 
-      margin-top: 22px;
+      margin-top: 12px;
 
-      padding: 16px;
+      padding: 12px;
 
       border: none;
 
@@ -591,18 +552,18 @@
       background:
         linear-gradient(
           90deg,
-          #e7a6bf,
-          #edaac7,
-          #e5b4da
+          #e6a3bd,
+          #ecaac7,
+          #e4b2da
         );
 
       box-shadow:
-        0 9px 24px
-        rgba(218,135,174,0.25);
+        0 7px 18px
+        rgba(218,135,174,0.22);
 
       color: white;
 
-      font-size: 17px;
+      font-size: 15px;
 
       font-weight: 600;
 
@@ -616,42 +577,38 @@
 
 
     #status {
-      min-height: 20px;
+      min-height: 16px;
 
-      margin-top: 13px;
+      margin-top: 8px;
 
       text-align: center;
 
-      font-size: 13px;
+      font-size: 11px;
 
       color: #999;
     }
 
 
-    /* -------------------------
-       スクロール案内
-    -------------------------- */
-
     .scroll-guide {
       margin:
-        6px 0
-        22px;
+        2px 0
+        12px;
 
       text-align: center;
 
-      font-size: 12px;
+      font-size: 10px;
 
       color:
-        rgba(130,90,120,0.65);
+        rgba(130,90,120,0.62);
     }
 
 
     .scroll-arrow {
       display: block;
 
-      margin-top: 6px;
+      margin-top: 2px;
 
-      font-size: 22px;
+      font-size: 18px;
     }
 
 
@@ -661,43 +618,42 @@
 
     .history-card {
       padding:
-        26px 18px;
+        20px 15px;
     }
 
 
     .history-heading {
-      margin-bottom: 5px;
+      margin-bottom: 3px;
 
       text-align: center;
 
-      font-size: 19px;
+      font-size: 18px;
 
       font-weight: 700;
     }
 
 
     .history-subheading {
-      margin-bottom: 20px;
+      margin-bottom: 14px;
 
       text-align: center;
 
-      font-size: 12px;
+      font-size: 10px;
 
       color: #aaa;
     }
 
 
     .history-item {
-      margin-bottom: 13px;
+      margin-bottom: 10px;
 
-      padding:
-        16px;
+      padding: 14px;
 
       border:
         1px solid
         rgba(238,211,223,0.8);
 
-      border-radius: 20px;
+      border-radius: 17px;
 
       background:
         rgba(255,249,252,0.8);
@@ -712,9 +668,9 @@
 
 
     .history-message {
-      font-size: 15px;
+      font-size: 14px;
 
-      line-height: 1.7;
+      line-height: 1.55;
 
       white-space: pre-wrap;
 
@@ -725,49 +681,99 @@
     .history-photo {
       width: 100%;
 
-      max-height: 280px;
+      max-height: 260px;
 
       object-fit: cover;
 
-      margin-top: 11px;
+      margin-top: 9px;
 
-      border-radius: 16px;
+      border-radius: 14px;
     }
 
 
     .history-date {
-      margin-top: 10px;
+      margin-top: 8px;
 
-      font-size: 11px;
+      font-size: 10px;
 
       color: #aaa;
     }
 
 
     .history-viewed {
-      margin-top: 7px;
+      margin-top: 5px;
 
-      font-size: 11px;
+      font-size: 10px;
 
       color: #999;
     }
 
 
     .history-reaction {
-      margin-top: 7px;
+      margin-top: 5px;
 
-      font-size: 13px;
+      font-size: 12px;
     }
 
 
     .empty-history {
-      padding: 22px 10px;
+      padding: 18px 8px;
 
       text-align: center;
 
-      font-size: 13px;
+      font-size: 12px;
 
       color: #aaa;
+    }
+
+
+    @media (max-height: 760px) {
+
+      body {
+        padding-top: 12px;
+      }
+
+      .title {
+        font-size: 22px;
+      }
+
+      .subtitle {
+        margin-bottom: 8px;
+      }
+
+      .card {
+        padding:
+          15px 14px;
+
+        margin-bottom: 9px;
+      }
+
+      .card-title {
+        font-size: 17px;
+      }
+
+      #receivedMessage {
+        padding:
+          10px 8px;
+
+        font-size: 16px;
+      }
+
+      .reaction-button {
+        width: 39px;
+        height: 39px;
+
+        font-size: 19px;
+      }
+
+      textarea {
+        min-height: 66px;
+      }
+
+      #sendButton {
+        margin-top: 10px;
+      }
+
     }
 
   </style>
@@ -785,6 +791,7 @@
     for you
   </div>
 
+
   <div class="subtitle">
     いつでも つながってるよ
   </div>
@@ -800,6 +807,7 @@
       受け取る 💌
     </div>
 
+
     <div class="card-subtitle">
       最新で届いたメッセージ
     </div>
@@ -809,7 +817,7 @@
       id="receivedMessage"
       class="loading"
     >
-      メッセージを読み込んでいます…
+      読み込んでいます…
     </div>
 
 
@@ -891,6 +899,7 @@
       届ける 💌
     </div>
 
+
     <div class="card-subtitle">
       メッセージや写真を送ってみよう
     </div>
@@ -944,6 +953,7 @@
 
   <div class="scroll-guide">
     下にスライドすると過去の履歴が見れる
+
     <span class="scroll-arrow">
       ⌄
     </span>
@@ -959,6 +969,7 @@
     <div class="history-heading">
       これまで届けたもの
     </div>
+
 
     <div class="history-subheading">
       あなたから届けたメッセージ
@@ -976,10 +987,6 @@
 
 <script>
 
-
-/* =========================
-   Supabase
-========================= */
 
 const PROJECT_URL =
   "https://pwuhcajvuwoumgzcrzcu.supabase.co";
@@ -1003,13 +1010,6 @@ const BUCKET =
   "photos";
 
 
-/*
-  彼女用ページ
-
-  相手 = すぱだり
-  自分 = 彼女
-*/
-
 const RECEIVED_FROM =
   "me";
 
@@ -1022,9 +1022,9 @@ let currentReceivedPostId =
   null;
 
 
-/* =========================
+/* -------------------------
    要素
-========================= */
+-------------------------- */
 
 const receivedMessage =
   document.getElementById(
@@ -1104,9 +1104,9 @@ const historyList =
   );
 
 
-/* =========================
-   最新の受信
-========================= */
+/* -------------------------
+   最新受信
+-------------------------- */
 
 async function loadLatestReceived() {
 
@@ -1140,7 +1140,6 @@ async function loadLatestReceived() {
             "Authorization":
               "Bearer " +
               SUPABASE_KEY
-
           }
 
         }
@@ -1150,12 +1149,8 @@ async function loadLatestReceived() {
 
     if (!response.ok) {
 
-      const errorText =
-        await response.text();
-
-
       throw new Error(
-        errorText
+        await response.text()
       );
 
     }
@@ -1212,8 +1207,6 @@ async function loadLatestReceived() {
       "";
 
 
-    /* 写真 */
-
     if (post.photo_url) {
 
       receivedPhoto.src =
@@ -1237,8 +1230,6 @@ async function loadLatestReceived() {
     }
 
 
-    /* リアクション */
-
     reactionArea.style.display =
       "block";
 
@@ -1247,8 +1238,6 @@ async function loadLatestReceived() {
       post.reaction
     );
 
-
-    /* 日時 */
 
     const date =
       new Date(
@@ -1260,25 +1249,14 @@ async function loadLatestReceived() {
       date.toLocaleString(
         "ja-JP",
         {
-          year:
-            "numeric",
-
-          month:
-            "long",
-
-          day:
-            "numeric",
-
-          hour:
-            "2-digit",
-
-          minute:
-            "2-digit"
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
         }
       );
 
-
-    /* 初回だけ既読 */
 
     if (!post.viewed_at) {
 
@@ -1311,9 +1289,9 @@ async function loadLatestReceived() {
 }
 
 
-/* =========================
+/* -------------------------
    既読
-========================= */
+-------------------------- */
 
 async function markAsViewed(
   postId
@@ -1352,17 +1330,14 @@ async function markAsViewed(
 
             "Prefer":
               "return=minimal"
-
           },
 
           body:
             JSON.stringify(
               {
-
                 viewed_at:
                   new Date()
                     .toISOString()
-
               }
             )
 
@@ -1373,12 +1348,8 @@ async function markAsViewed(
 
     if (!response.ok) {
 
-      const errorText =
-        await response.text();
-
-
       throw new Error(
-        errorText
+        await response.text()
       );
 
     }
@@ -1396,9 +1367,9 @@ async function markAsViewed(
 }
 
 
-/* =========================
-   リアクション
-========================= */
+/* -------------------------
+   リアクション保存
+-------------------------- */
 
 async function saveReaction(
   reaction
@@ -1446,16 +1417,13 @@ async function saveReaction(
 
             "Prefer":
               "return=minimal"
-
           },
 
           body:
             JSON.stringify(
               {
-
                 reaction:
                   reaction
-
               }
             )
 
@@ -1466,12 +1434,8 @@ async function saveReaction(
 
     if (!response.ok) {
 
-      const errorText =
-        await response.text();
-
-
       throw new Error(
-        errorText
+        await response.text()
       );
 
     }
@@ -1493,7 +1457,7 @@ async function saveReaction(
           "";
 
       },
-      1500
+      1400
     );
 
 
@@ -1512,9 +1476,9 @@ async function saveReaction(
 }
 
 
-/* =========================
-   リアクション選択表示
-========================= */
+/* -------------------------
+   リアクション表示
+-------------------------- */
 
 function updateReactionButtons(
   reaction
@@ -1554,9 +1518,9 @@ function updateReactionButtons(
 }
 
 
-/* =========================
+/* -------------------------
    リアクション操作
-========================= */
+-------------------------- */
 
 document
   .querySelectorAll(
@@ -1580,9 +1544,9 @@ document
   );
 
 
-/* =========================
+/* -------------------------
    写真プレビュー
-========================= */
+-------------------------- */
 
 photoInput.addEventListener(
   "change",
@@ -1630,9 +1594,9 @@ photoInput.addEventListener(
 );
 
 
-/* =========================
+/* -------------------------
    届ける
-========================= */
+-------------------------- */
 
 sendButton.addEventListener(
   "click",
@@ -1673,10 +1637,6 @@ sendButton.addEventListener(
 
     try {
 
-
-      /* ----------------
-         写真アップロード
-      ---------------- */
 
       if (file) {
 
@@ -1729,12 +1689,10 @@ sendButton.addEventListener(
 
                 "x-upsert":
                   "false"
-
               },
 
               body:
                 file
-
             }
 
           );
@@ -1742,13 +1700,9 @@ sendButton.addEventListener(
 
         if (!photoResponse.ok) {
 
-          const errorText =
-            await photoResponse.text();
-
-
           throw new Error(
             "写真送信失敗: " +
-            errorText
+            await photoResponse.text()
           );
 
         }
@@ -1769,10 +1723,6 @@ sendButton.addEventListener(
 
       }
 
-
-      /* ----------------
-         投稿保存
-      ---------------- */
 
       const messageResponse =
         await fetch(
@@ -1799,7 +1749,6 @@ sendButton.addEventListener(
 
               "Prefer":
                 "return=minimal"
-
             },
 
             body:
@@ -1832,13 +1781,9 @@ sendButton.addEventListener(
 
       if (!messageResponse.ok) {
 
-        const errorText =
-          await messageResponse.text();
-
-
         throw new Error(
           "メッセージ送信失敗: " +
-          errorText
+          await messageResponse.text()
         );
 
       }
@@ -1880,7 +1825,7 @@ sendButton.addEventListener(
             "";
 
         },
-        2000
+        1800
       );
 
 
@@ -1906,9 +1851,9 @@ sendButton.addEventListener(
 );
 
 
-/* =========================
-   自分が送った履歴
-========================= */
+/* -------------------------
+   履歴
+-------------------------- */
 
 async function loadHistory() {
 
@@ -1942,7 +1887,6 @@ async function loadHistory() {
             "Authorization":
               "Bearer " +
               SUPABASE_KEY
-
           }
 
         }
@@ -1952,12 +1896,8 @@ async function loadHistory() {
 
     if (!response.ok) {
 
-      const errorText =
-        await response.text();
-
-
       throw new Error(
-        errorText
+        await response.text()
       );
 
     }
@@ -2010,8 +1950,6 @@ async function loadHistory() {
           "history-item";
 
 
-        /* メッセージ */
-
         if (post.message) {
 
           const message =
@@ -2034,8 +1972,6 @@ async function loadHistory() {
 
         }
 
-
-        /* 写真 */
 
         if (post.photo_url) {
 
@@ -2064,8 +2000,6 @@ async function loadHistory() {
         }
 
 
-        /* 送信時間 */
-
         const date =
           new Date(
             post.created_at
@@ -2087,22 +2021,11 @@ async function loadHistory() {
           date.toLocaleString(
             "ja-JP",
             {
-
-              year:
-                "numeric",
-
-              month:
-                "long",
-
-              day:
-                "numeric",
-
-              hour:
-                "2-digit",
-
-              minute:
-                "2-digit"
-
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit"
             }
           );
 
@@ -2111,8 +2034,6 @@ async function loadHistory() {
           dateText
         );
 
-
-        /* 既読 */
 
         const viewed =
           document.createElement(
@@ -2137,19 +2058,10 @@ async function loadHistory() {
             viewedDate.toLocaleString(
               "ja-JP",
               {
-
-                month:
-                  "long",
-
-                day:
-                  "numeric",
-
-                hour:
-                  "2-digit",
-
-                minute:
-                  "2-digit"
-
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
               }
             );
 
@@ -2165,8 +2077,6 @@ async function loadHistory() {
           viewed
         );
 
-
-        /* リアクション */
 
         const reaction =
           document.createElement(
@@ -2220,17 +2130,17 @@ async function loadHistory() {
 }
 
 
-/* =========================
-   最初に読み込む
-========================= */
+/* -------------------------
+   初回読み込み
+-------------------------- */
 
 loadLatestReceived();
 loadHistory();
 
 
-/* =========================
-   5秒ごとに更新
-========================= */
+/* -------------------------
+   自動更新
+-------------------------- */
 
 setInterval(
   function() {
