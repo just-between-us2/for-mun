@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -177,7 +178,7 @@
     .title {
       margin:
         4px 0
-        4px;
+        12px;
 
       text-align: center;
 
@@ -189,22 +190,10 @@
     }
 
 
-    .subtitle {
-      margin-bottom: 12px;
-
-      text-align: center;
-
-      font-size: 11px;
-
-      color:
-        rgba(95,75,100,0.48);
-    }
-
-
     .card {
       width: 100%;
 
-      margin-bottom: 12px;
+      margin-bottom: 10px;
 
       padding:
         18px 16px;
@@ -231,24 +220,13 @@
 
 
     .card-title {
-      margin-bottom: 2px;
+      margin-bottom: 12px;
 
       text-align: center;
 
       font-size: 18px;
 
       font-weight: 700;
-    }
-
-
-    .card-subtitle {
-      margin-bottom: 10px;
-
-      text-align: center;
-
-      font-size: 10px;
-
-      color: #aaa;
     }
 
 
@@ -407,39 +385,6 @@
     }
 
 
-    .divider {
-      display: flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      margin:
-        2px 4px
-        10px;
-
-      color:
-        rgba(155,110,145,0.65);
-
-      font-size: 10px;
-
-      white-space: nowrap;
-    }
-
-
-    .divider::before,
-    .divider::after {
-      content: "";
-
-      height: 1px;
-
-      flex: 1;
-
-      background:
-        rgba(200,160,185,0.32);
-    }
-
-
     /* -------------------------
        届ける
     -------------------------- */
@@ -589,9 +534,13 @@
     }
 
 
+    /* -------------------------
+       スクロール案内
+    -------------------------- */
+
     .scroll-guide {
       margin:
-        2px 0
+        3px 0
         12px;
 
       text-align: center;
@@ -623,24 +572,13 @@
 
 
     .history-heading {
-      margin-bottom: 3px;
+      margin-bottom: 14px;
 
       text-align: center;
 
       font-size: 18px;
 
       font-weight: 700;
-    }
-
-
-    .history-subheading {
-      margin-bottom: 14px;
-
-      text-align: center;
-
-      font-size: 10px;
-
-      color: #aaa;
     }
 
 
@@ -733,24 +671,28 @@
         padding-top: 12px;
       }
 
+
       .title {
+        margin-bottom: 8px;
+
         font-size: 22px;
       }
 
-      .subtitle {
-        margin-bottom: 8px;
-      }
 
       .card {
         padding:
           15px 14px;
 
-        margin-bottom: 9px;
+        margin-bottom: 8px;
       }
 
+
       .card-title {
+        margin-bottom: 9px;
+
         font-size: 17px;
       }
+
 
       #receivedMessage {
         padding:
@@ -759,6 +701,7 @@
         font-size: 16px;
       }
 
+
       .reaction-button {
         width: 39px;
         height: 39px;
@@ -766,9 +709,11 @@
         font-size: 19px;
       }
 
+
       textarea {
         min-height: 66px;
       }
+
 
       #sendButton {
         margin-top: 10px;
@@ -787,13 +732,9 @@
 
 <div class="page">
 
+
   <div class="title">
     for you
-  </div>
-
-
-  <div class="subtitle">
-    いつでも つながってるよ
   </div>
 
 
@@ -805,11 +746,6 @@
 
     <div class="card-title">
       受け取る 💌
-    </div>
-
-
-    <div class="card-subtitle">
-      最新で届いたメッセージ
     </div>
 
 
@@ -884,11 +820,6 @@
   </div>
 
 
-  <div class="divider">
-    ✦ ふたりの星空 ✦
-  </div>
-
-
   <!-- =========================
        届ける
   ========================== -->
@@ -897,11 +828,6 @@
 
     <div class="card-title">
       届ける 💌
-    </div>
-
-
-    <div class="card-subtitle">
-      メッセージや写真を送ってみよう
     </div>
 
 
@@ -971,11 +897,6 @@
     </div>
 
 
-    <div class="history-subheading">
-      あなたから届けたメッセージ
-    </div>
-
-
     <div id="historyList">
       読み込んでいます…
     </div>
@@ -1009,6 +930,16 @@ const SUPABASE_KEY =
 const BUCKET =
   "photos";
 
+
+/*
+  彼女用ページ
+
+  受け取る：
+  すぱだりからのメッセージ
+
+  届ける：
+  彼女として送る
+*/
 
 const RECEIVED_FROM =
   "me";
@@ -1140,6 +1071,7 @@ async function loadLatestReceived() {
             "Authorization":
               "Bearer " +
               SUPABASE_KEY
+
           }
 
         }
@@ -1207,6 +1139,8 @@ async function loadLatestReceived() {
       "";
 
 
+    /* 写真 */
+
     if (post.photo_url) {
 
       receivedPhoto.src =
@@ -1230,6 +1164,8 @@ async function loadLatestReceived() {
     }
 
 
+    /* リアクション */
+
     reactionArea.style.display =
       "block";
 
@@ -1238,6 +1174,8 @@ async function loadLatestReceived() {
       post.reaction
     );
 
+
+    /* 日時 */
 
     const date =
       new Date(
@@ -1249,14 +1187,25 @@ async function loadLatestReceived() {
       date.toLocaleString(
         "ja-JP",
         {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit"
+          year:
+            "numeric",
+
+          month:
+            "long",
+
+          day:
+            "numeric",
+
+          hour:
+            "2-digit",
+
+          minute:
+            "2-digit"
         }
       );
 
+
+    /* 初回だけ既読 */
 
     if (!post.viewed_at) {
 
@@ -1330,6 +1279,7 @@ async function markAsViewed(
 
             "Prefer":
               "return=minimal"
+
           },
 
           body:
@@ -1417,6 +1367,7 @@ async function saveReaction(
 
             "Prefer":
               "return=minimal"
+
           },
 
           body:
@@ -1638,6 +1589,8 @@ sendButton.addEventListener(
     try {
 
 
+      /* 写真アップロード */
+
       if (file) {
 
         const extension =
@@ -1689,10 +1642,12 @@ sendButton.addEventListener(
 
                 "x-upsert":
                   "false"
+
               },
 
               body:
                 file
+
             }
 
           );
@@ -1724,6 +1679,8 @@ sendButton.addEventListener(
       }
 
 
+      /* 投稿保存 */
+
       const messageResponse =
         await fetch(
 
@@ -1749,6 +1706,7 @@ sendButton.addEventListener(
 
               "Prefer":
                 "return=minimal"
+
             },
 
             body:
@@ -1887,6 +1845,7 @@ async function loadHistory() {
             "Authorization":
               "Bearer " +
               SUPABASE_KEY
+
           }
 
         }
@@ -2021,11 +1980,20 @@ async function loadHistory() {
           date.toLocaleString(
             "ja-JP",
             {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit"
+              year:
+                "numeric",
+
+              month:
+                "long",
+
+              day:
+                "numeric",
+
+              hour:
+                "2-digit",
+
+              minute:
+                "2-digit"
             }
           );
 
@@ -2058,10 +2026,17 @@ async function loadHistory() {
             viewedDate.toLocaleString(
               "ja-JP",
               {
-                month: "long",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit"
+                month:
+                  "long",
+
+                day:
+                  "numeric",
+
+                hour:
+                  "2-digit",
+
+                minute:
+                  "2-digit"
               }
             );
 
@@ -2131,7 +2106,7 @@ async function loadHistory() {
 
 
 /* -------------------------
-   初回読み込み
+   最初に読み込む
 -------------------------- */
 
 loadLatestReceived();
@@ -2139,7 +2114,7 @@ loadHistory();
 
 
 /* -------------------------
-   自動更新
+   5秒ごとに更新
 -------------------------- */
 
 setInterval(
