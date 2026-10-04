@@ -1,11 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="ja">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
+
     name="viewport"
+
     content="width=device-width, initial-scale=1.0"
+
   >
 
   <title>for you</title>
@@ -13,72 +19,106 @@
   <style>
 
     * {
+
       box-sizing: border-box;
+
     }
 
     html {
+
       scroll-behavior: smooth;
+
     }
 
     body {
+
       margin: 0;
+
       min-height: 100vh;
 
       padding:
+
         18px 16px
+
         50px;
 
       font-family:
+
         -apple-system,
+
         BlinkMacSystemFont,
+
         "Hiragino Sans",
+
         "Noto Sans JP",
+
         sans-serif;
 
       color: #3b3340;
 
       background:
+
         radial-gradient(
+
           circle at 10% 8%,
+
           rgba(255,255,255,0.92),
+
           transparent 23%
+
         ),
+
         radial-gradient(
+
           circle at 90% 16%,
+
           rgba(255,217,238,0.75),
+
           transparent 28%
+
         ),
+
         radial-gradient(
+
           circle at 50% 80%,
+
           rgba(234,220,255,0.5),
+
           transparent 35%
+
         ),
+
         linear-gradient(
+
           165deg,
+
           #fff9fc 0%,
+
           #fceaf3 40%,
+
           #f6ddeb 72%,
+
           #eadff7 100%
+
         );
 
       overflow-x: hidden;
+
     }
 
-
-    /* -------------------------
-       星空
-    -------------------------- */
+    /* 星空 */
 
     body::before {
+
       content: "✦";
 
       position: fixed;
 
       top: 9%;
+
       left: 6%;
 
-      color:
-        rgba(170,145,220,0.52);
+      color: rgba(170,145,220,0.52);
 
       font-size: 13px;
 
@@ -87,49 +127,71 @@
       z-index: 0;
 
       text-shadow:
+
         38px 52px 0 rgba(255,255,255,0.9),
+
         92px 14px 0 rgba(190,160,230,0.5),
+
         148px 78px 0 rgba(255,255,255,0.85),
+
         210px 26px 0 rgba(180,145,220,0.5),
+
         278px 64px 0 rgba(255,255,255,0.88),
+
         320px 20px 0 rgba(188,155,228,0.5),
 
         24px 180px 0 rgba(255,255,255,0.86),
+
         110px 220px 0 rgba(185,150,225,0.45),
+
         196px 170px 0 rgba(255,255,255,0.82),
+
         286px 212px 0 rgba(190,160,230,0.45),
 
         42px 345px 0 rgba(255,255,255,0.88),
+
         138px 300px 0 rgba(180,145,220,0.42),
+
         250px 340px 0 rgba(255,255,255,0.84),
+
         322px 298px 0 rgba(190,155,228,0.46),
 
         18px 500px 0 rgba(255,255,255,0.84),
+
         102px 548px 0 rgba(180,145,220,0.42),
+
         212px 520px 0 rgba(255,255,255,0.9),
+
         306px 570px 0 rgba(188,155,228,0.45),
 
         56px 705px 0 rgba(255,255,255,0.86),
+
         176px 748px 0 rgba(185,150,225,0.45),
+
         298px 720px 0 rgba(255,255,255,0.88);
+
     }
 
+    /* 月 */
 
     body::after {
+
       content: "☾";
 
       position: fixed;
 
       top: 10%;
+
       right: 7%;
 
-      color:
-        rgba(255,255,255,0.95);
+      color: rgba(255,255,255,0.95);
 
       font-size: 48px;
 
       text-shadow:
+
         0 0 12px rgba(255,255,255,0.75),
+
         0 0 24px rgba(255,255,255,0.45);
 
       pointer-events: none;
@@ -137,27 +199,36 @@
       z-index: 0;
 
       opacity: 0.95;
+
     }
 
+    /* 流れ星 */
 
     .shooting-star {
+
       position: fixed;
 
       top: 17%;
+
       left: 17%;
 
       width: 72px;
+
       height: 1.5px;
 
       background:
+
         linear-gradient(
+
           90deg,
+
           transparent,
+
           rgba(175,145,220,0.68)
+
         );
 
-      transform:
-        rotate(-26deg);
+      transform: rotate(-26deg);
 
       border-radius: 999px;
 
@@ -166,28 +237,31 @@
       z-index: 0;
 
       opacity: 0.9;
+
     }
 
-
     .shooting-star::after {
+
       content: "✦";
 
       position: absolute;
 
       right: -2px;
+
       top: -8px;
 
       font-size: 13px;
 
-      color:
-        rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.9);
 
       text-shadow:
+
         0 0 8px rgba(255,255,255,0.65);
+
     }
 
-
     .page {
+
       position: relative;
 
       z-index: 1;
@@ -197,12 +271,15 @@
       max-width: 460px;
 
       margin: 0 auto;
+
     }
 
-
     .title {
+
       margin:
+
         4px 0
+
         12px;
 
       text-align: center;
@@ -212,39 +289,49 @@
       font-weight: 650;
 
       letter-spacing: 0.02em;
+
     }
 
-
     .card {
+
       width: 100%;
 
       margin-bottom: 10px;
 
       padding:
+
         18px 16px;
 
       border:
+
         1px solid
+
         rgba(255,255,255,0.8);
 
       border-radius: 25px;
 
       background:
+
         rgba(255,255,255,0.80);
 
       backdrop-filter:
+
         blur(14px);
 
       -webkit-backdrop-filter:
+
         blur(14px);
 
       box-shadow:
+
         0 12px 34px
+
         rgba(178,105,145,0.12);
+
     }
 
-
     .card-title {
+
       margin-bottom: 12px;
 
       text-align: center;
@@ -252,24 +339,27 @@
       font-size: 18px;
 
       font-weight: 700;
+
     }
 
-
-    /* -------------------------
-       受け取る
-    -------------------------- */
+    /* 受け取る */
 
     #receivedMessage {
+
       padding:
+
         12px 10px;
 
       border:
+
         1px solid
+
         rgba(234,182,200,0.5);
 
       border-radius: 17px;
 
       background:
+
         rgba(255,248,251,0.82);
 
       font-size: 17px;
@@ -281,24 +371,27 @@
       white-space: pre-wrap;
 
       word-break: break-word;
+
     }
 
-
     .loading {
+
       font-size: 13px !important;
 
       color: #aaa;
+
     }
 
-
     #receivedPhotoArea {
+
       display: none;
 
       margin-top: 10px;
+
     }
 
-
     #receivedPhoto {
+
       width: 100%;
 
       max-height: 250px;
@@ -308,12 +401,17 @@
       border-radius: 16px;
 
       box-shadow:
+
         0 6px 18px
+
         rgba(150,100,120,0.12);
+
     }
 
+    /* リアクション */
 
     #reactionArea {
+
       display: none;
 
       margin-top: 10px;
@@ -321,12 +419,15 @@
       padding-top: 10px;
 
       border-top:
+
         1px solid
+
         rgba(235,210,220,0.8);
+
     }
 
-
     .reaction-title {
+
       margin-bottom: 7px;
 
       text-align: center;
@@ -334,10 +435,11 @@
       font-size: 10px;
 
       color: #aaa;
+
     }
 
-
     .reaction-buttons {
+
       display: flex;
 
       justify-content: center;
@@ -345,11 +447,13 @@
       gap: 8px;
 
       flex-wrap: wrap;
+
     }
 
-
     .reaction-button {
+
       width: 42px;
+
       height: 42px;
 
       border: none;
@@ -357,6 +461,7 @@
       border-radius: 50%;
 
       background:
+
         rgba(255,239,246,0.95);
 
       font-size: 20px;
@@ -364,29 +469,37 @@
       cursor: pointer;
 
       transition:
-        transform 0.15s,
-        background 0.15s,
-        box-shadow 0.15s;
-    }
 
+        transform 0.15s,
+
+        background 0.15s,
+
+        box-shadow 0.15s;
+
+    }
 
     .reaction-button:active {
+
       transform: scale(0.9);
+
     }
 
-
     .reaction-button.selected {
+
       background: #f5c9da;
 
       transform: scale(1.06);
 
       box-shadow:
+
         0 0 14px
+
         rgba(231,155,187,0.30);
+
     }
 
-
     #reactionStatus {
+
       min-height: 14px;
 
       margin-top: 6px;
@@ -396,10 +509,11 @@
       font-size: 10px;
 
       color: #aaa;
+
     }
 
-
     #receivedDate {
+
       margin-top: 7px;
 
       text-align: center;
@@ -407,14 +521,13 @@
       font-size: 10px;
 
       color: #aaa;
+
     }
 
-
-    /* -------------------------
-       届ける
-    -------------------------- */
+    /* 届ける */
 
     textarea {
+
       width: 100%;
 
       min-height: 78px;
@@ -422,7 +535,9 @@
       padding: 12px;
 
       border:
+
         1px solid
+
         #efd4df;
 
       border-radius: 17px;
@@ -432,6 +547,7 @@
       outline: none;
 
       background:
+
         rgba(255,249,252,0.9);
 
       font-size: 15px;
@@ -441,48 +557,57 @@
       font-family: inherit;
 
       color: #3d3440;
+
     }
 
-
     textarea:focus {
+
       border-color: #e6acc3;
 
       box-shadow:
+
         0 0 0 3px
+
         rgba(235,180,202,0.10);
+
     }
 
-
     .photo-area {
+
       margin-top: 10px;
 
       text-align: center;
+
     }
 
-
     .file-label {
+
       display: inline-block;
 
       padding:
+
         9px 15px;
 
       border-radius: 999px;
 
       background:
+
         rgba(255,233,243,0.95);
 
       cursor: pointer;
 
       font-size: 13px;
-    }
 
+    }
 
     #photoInput {
+
       display: none;
+
     }
 
-
     #previewTitle {
+
       display: none;
 
       margin-top: 10px;
@@ -490,10 +615,11 @@
       font-size: 10px;
 
       color: #aaa;
+
     }
 
-
     #preview {
+
       display: none;
 
       width: 100%;
@@ -505,10 +631,11 @@
       margin-top: 8px;
 
       border-radius: 16px;
+
     }
 
-
     #sendButton {
+
       width: 100%;
 
       margin-top: 12px;
@@ -520,15 +647,23 @@
       border-radius: 999px;
 
       background:
+
         linear-gradient(
+
           90deg,
+
           #e6a3bd,
+
           #ecaac7,
+
           #e4b2da
+
         );
 
       box-shadow:
+
         0 7px 18px
+
         rgba(218,135,174,0.22);
 
       color: white;
@@ -538,15 +673,17 @@
       font-weight: 600;
 
       cursor: pointer;
-    }
 
+    }
 
     #sendButton:disabled {
+
       opacity: 0.5;
+
     }
 
-
     #status {
+
       min-height: 16px;
 
       margin-top: 8px;
@@ -556,12 +693,17 @@
       font-size: 11px;
 
       color: #999;
+
     }
 
+    /* スクロール案内 */
 
     .scroll-guide {
+
       margin:
+
         3px 0
+
         12px;
 
       text-align: center;
@@ -569,30 +711,33 @@
       font-size: 10px;
 
       color:
+
         rgba(130,90,120,0.62);
+
     }
 
-
     .scroll-arrow {
+
       display: block;
 
       margin-top: 2px;
 
       font-size: 18px;
+
     }
 
-
-    /* -------------------------
-       履歴
-    -------------------------- */
+    /* 履歴 */
 
     .history-card {
+
       padding:
+
         20px 15px;
+
     }
 
-
     .history-heading {
+
       margin-bottom: 14px;
 
       text-align: center;
@@ -600,33 +745,39 @@
       font-size: 18px;
 
       font-weight: 700;
+
     }
 
-
     .history-item {
+
       margin-bottom: 10px;
 
       padding: 14px;
 
       border:
+
         1px solid
+
         rgba(238,211,223,0.8);
 
       border-radius: 17px;
 
       background:
+
         rgba(255,249,252,0.8);
 
       text-align: left;
-    }
 
+    }
 
     .history-item:last-child {
+
       margin-bottom: 0;
+
     }
 
-
     .history-message {
+
       font-size: 14px;
 
       line-height: 1.55;
@@ -634,10 +785,11 @@
       white-space: pre-wrap;
 
       word-break: break-word;
+
     }
 
-
     .history-photo {
+
       width: 100%;
 
       max-height: 260px;
@@ -647,35 +799,39 @@
       margin-top: 9px;
 
       border-radius: 14px;
+
     }
 
-
     .history-date {
+
       margin-top: 8px;
 
       font-size: 10px;
 
       color: #aaa;
+
     }
 
-
     .history-viewed {
+
       margin-top: 5px;
 
       font-size: 10px;
 
       color: #999;
+
     }
 
-
     .history-reaction {
+
       margin-top: 5px;
 
       font-size: 12px;
+
     }
 
-
     .empty-history {
+
       padding: 18px 8px;
 
       text-align: center;
@@ -683,85 +839,1615 @@
       font-size: 12px;
 
       color: #aaa;
-    }
-
-
-    @media (max-height: 760px) {
-
-      body {
-        padding-top: 12px;
-      }
-
-
-      .title {
-        margin-bottom: 8px;
-
-        font-size: 22px;
-      }
-
-
-      .card {
-        padding:
-          15px 14px;
-
-        margin-bottom: 8px;
-      }
-
-
-      .card-title {
-        margin-bottom: 9px;
-
-        font-size: 17px;
-      }
-
-
-      #receivedMessage {
-        padding:
-          10px 8px;
-
-        font-size: 16px;
-      }
-
-
-      .reaction-button {
-        width: 39px;
-        height: 39px;
-
-        font-size: 19px;
-      }
-
-
-      textarea {
-        min-height: 66px;
-      }
-
-
-      #sendButton {
-        margin-top: 10px;
-      }
 
     }
 
   </style>
-</head>
 
+</head>
 
 <body>
 
 <div class="shooting-star"></div>
 
-
 <div class="page">
 
   <div class="title">
-    for you
-  </div>
 
+    for you
+
+  </div>
 
   <!-- 受け取る -->
 
   <div class="card">
 
     <div class="card-title">
+
       受け取る 💌
+
     </div>
+
+    <div
+
+      id="receivedMessage"
+
+      class="loading"
+
+    >
+
+      読み込んでいます…
+
+    </div>
+
+    <div id="receivedPhotoArea">
+
+      <img
+
+        id="receivedPhoto"
+
+        alt="received photo"
+
+      >
+
+    </div>
+
+    <div id="reactionArea">
+
+      <div class="reaction-title">
+
+        気持ちを返す
+
+      </div>
+
+      <div class="reaction-buttons">
+
+        <button
+
+          class="reaction-button"
+
+          data-reaction="🫶"
+
+        >
+
+          🫶
+
+        </button>
+
+        <button
+
+          class="reaction-button"
+
+          data-reaction="🤟"
+
+        >
+
+          🤟
+
+        </button>
+
+        <button
+
+          class="reaction-button"
+
+          data-reaction="🦄"
+
+        >
+
+          🦄
+
+        </button>
+
+        <button
+
+          class="reaction-button"
+
+          data-reaction="🧸"
+
+        >
+
+          🧸
+
+        </button>
+
+      </div>
+
+      <div id="reactionStatus"></div>
+
+    </div>
+
+    <div id="receivedDate"></div>
+
+  </div>
+
+  <!-- 届ける -->
+
+  <div class="card">
+
+    <div class="card-title">
+
+      届ける 💌
+
+    </div>
+
+    <textarea
+
+      id="messageInput"
+
+      placeholder="メッセージを書く…"
+
+    ></textarea>
+
+    <div class="photo-area">
+
+      <label
+
+        class="file-label"
+
+        for="photoInput"
+
+      >
+
+        📷 写真を選ぶ
+
+      </label>
+
+      <input
+
+        id="photoInput"
+
+        type="file"
+
+        accept="image/*"
+
+      >
+
+      <div id="previewTitle">
+
+        今回届ける写真
+
+      </div>
+
+      <img
+
+        id="preview"
+
+        alt="preview"
+
+      >
+
+    </div>
+
+    <button id="sendButton">
+
+      届ける 💌
+
+    </button>
+
+    <div id="status"></div>
+
+  </div>
+
+  <div class="scroll-guide">
+
+    下にスライドすると過去の履歴が見れる
+
+    <span class="scroll-arrow">
+
+      ⌄
+
+    </span>
+
+  </div>
+
+  <!-- 履歴 -->
+
+  <div class="card history-card">
+
+    <div class="history-heading">
+
+      これまで届けたもの
+
+    </div>
+
+    <div id="historyList">
+
+      読み込んでいます…
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const PROJECT_URL =
+
+  "https://pwuhcajvuwoumgzcrzcu.supabase.co";
+
+const REST_URL =
+
+  PROJECT_URL +
+
+  "/rest/v1";
+
+const STORAGE_URL =
+
+  PROJECT_URL +
+
+  "/storage/v1";
+
+const SUPABASE_KEY =
+
+  "sb_publishable_xKz256OVExfMdxs0qajatw_LUtHDFSd";
+
+const BUCKET =
+
+  "photos";
+
+const RECEIVED_FROM =
+
+  "me";
+
+const SEND_AS =
+
+  "her";
+
+let currentReceivedPostId =
+
+  null;
+
+/* 要素 */
+
+const receivedMessage =
+
+  document.getElementById(
+
+    "receivedMessage"
+
+  );
+
+const receivedPhotoArea =
+
+  document.getElementById(
+
+    "receivedPhotoArea"
+
+  );
+
+const receivedPhoto =
+
+  document.getElementById(
+
+    "receivedPhoto"
+
+  );
+
+const receivedDate =
+
+  document.getElementById(
+
+    "receivedDate"
+
+  );
+
+const reactionArea =
+
+  document.getElementById(
+
+    "reactionArea"
+
+  );
+
+const reactionStatus =
+
+  document.getElementById(
+
+    "reactionStatus"
+
+  );
+
+const messageInput =
+
+  document.getElementById(
+
+    "messageInput"
+
+  );
+
+const photoInput =
+
+  document.getElementById(
+
+    "photoInput"
+
+  );
+
+const preview =
+
+  document.getElementById(
+
+    "preview"
+
+  );
+
+const previewTitle =
+
+  document.getElementById(
+
+    "previewTitle"
+
+  );
+
+const sendButton =
+
+  document.getElementById(
+
+    "sendButton"
+
+  );
+
+const status =
+
+  document.getElementById(
+
+    "status"
+
+  );
+
+const historyList =
+
+  document.getElementById(
+
+    "historyList"
+
+  );
+
+/* 最新受信 */
+
+async function loadLatestReceived() {
+
+  try {
+
+    const response =
+
+      await fetch(
+
+        REST_URL +
+
+        "/messages" +
+
+        "?select=id,message,photo_url,created_at,viewed_at,reaction,sender" +
+
+        "&sender=eq." +
+
+        encodeURIComponent(
+
+          RECEIVED_FROM
+
+        ) +
+
+        "&order=id.desc" +
+
+        "&limit=1",
+
+        {
+
+          headers: {
+
+            "apikey":
+
+              SUPABASE_KEY,
+
+            "Authorization":
+
+              "Bearer " +
+
+              SUPABASE_KEY
+
+          }
+
+        }
+
+      );
+
+    if (!response.ok) {
+
+      throw new Error(
+
+        await response.text()
+
+      );
+
+    }
+
+    const data =
+
+      await response.json();
+
+    receivedMessage
+
+      .classList
+
+      .remove(
+
+        "loading"
+
+      );
+
+    if (data.length === 0) {
+
+      currentReceivedPostId =
+
+        null;
+
+      receivedMessage.textContent =
+
+        "まだ届いていません 💭";
+
+      receivedPhotoArea.style.display =
+
+        "none";
+
+      reactionArea.style.display =
+
+        "none";
+
+      receivedDate.textContent =
+
+        "";
+
+      return;
+
+    }
+
+    const post =
+
+      data[0];
+
+    currentReceivedPostId =
+
+      post.id;
+
+    receivedMessage.textContent =
+
+      post.message ||
+
+      "";
+
+    if (post.photo_url) {
+
+      receivedPhoto.src =
+
+        post.photo_url;
+
+      receivedPhotoArea.style.display =
+
+        "block";
+
+    } else {
+
+      receivedPhoto
+
+        .removeAttribute(
+
+          "src"
+
+        );
+
+      receivedPhotoArea.style.display =
+
+        "none";
+
+    }
+
+    reactionArea.style.display =
+
+      "block";
+
+    updateReactionButtons(
+
+      post.reaction
+
+    );
+
+    const date =
+
+      new Date(
+
+        post.created_at
+
+      );
+
+    receivedDate.textContent =
+
+      date.toLocaleString(
+
+        "ja-JP",
+
+        {
+
+          year: "numeric",
+
+          month: "long",
+
+          day: "numeric",
+
+          hour: "2-digit",
+
+          minute: "2-digit"
+
+        }
+
+      );
+
+    if (!post.viewed_at) {
+
+      await markAsViewed(
+
+        post.id
+
+      );
+
+    }
+
+  } catch (error) {
+
+    console.error(
+
+      error
+
+    );
+
+    receivedMessage
+
+      .classList
+
+      .remove(
+
+        "loading"
+
+      );
+
+    receivedMessage.textContent =
+
+      "読み込めませんでした 🥲";
+
+  }
+
+}
+
+/* 既読 */
+
+async function markAsViewed(
+
+  postId
+
+) {
+
+  try {
+
+    const response =
+
+      await fetch(
+
+        REST_URL +
+
+        "/messages" +
+
+        "?id=eq." +
+
+        postId +
+
+        "&viewed_at=is.null",
+
+        {
+
+          method:
+
+            "PATCH",
+
+          headers: {
+
+            "apikey":
+
+              SUPABASE_KEY,
+
+            "Authorization":
+
+              "Bearer " +
+
+              SUPABASE_KEY,
+
+            "Content-Type":
+
+              "application/json",
+
+            "Prefer":
+
+              "return=minimal"
+
+          },
+
+          body:
+
+            JSON.stringify(
+
+              {
+
+                viewed_at:
+
+                  new Date()
+
+                    .toISOString()
+
+              }
+
+            )
+
+        }
+
+      );
+
+    if (!response.ok) {
+
+      throw new Error(
+
+        await response.text()
+
+      );
+
+    }
+
+  } catch (error) {
+
+    console.error(
+
+      error
+
+    );
+
+  }
+
+}
+
+/* リアクション */
+
+async function saveReaction(
+
+  reaction
+
+) {
+
+  if (!currentReceivedPostId) {
+
+    return;
+
+  }
+
+  reactionStatus.textContent =
+
+    "届けています…";
+
+  try {
+
+    const response =
+
+      await fetch(
+
+        REST_URL +
+
+        "/messages" +
+
+        "?id=eq." +
+
+        currentReceivedPostId,
+
+        {
+
+          method:
+
+            "PATCH",
+
+          headers: {
+
+            "apikey":
+
+              SUPABASE_KEY,
+
+            "Authorization":
+
+              "Bearer " +
+
+              SUPABASE_KEY,
+
+            "Content-Type":
+
+              "application/json",
+
+            "Prefer":
+
+              "return=minimal"
+
+          },
+
+          body:
+
+            JSON.stringify(
+
+              {
+
+                reaction:
+
+                  reaction
+
+              }
+
+            )
+
+        }
+
+      );
+
+    if (!response.ok) {
+
+      throw new Error(
+
+        await response.text()
+
+      );
+
+    }
+
+    updateReactionButtons(
+
+      reaction
+
+    );
+
+    reactionStatus.textContent =
+
+      "届きました ♡";
+
+    setTimeout(
+
+      function() {
+
+        reactionStatus.textContent =
+
+          "";
+
+      },
+
+      1400
+
+    );
+
+  } catch (error) {
+
+    console.error(
+
+      error
+
+    );
+
+    reactionStatus.textContent =
+
+      "送れませんでした 🥲";
+
+  }
+
+}
+
+/* リアクション表示 */
+
+function updateReactionButtons(
+
+  reaction
+
+) {
+
+  document
+
+    .querySelectorAll(
+
+      ".reaction-button"
+
+    )
+
+    .forEach(
+
+      function(button) {
+
+        if (
+
+          button.dataset.reaction ===
+
+          reaction
+
+        ) {
+
+          button
+
+            .classList
+
+            .add(
+
+              "selected"
+
+            );
+
+        } else {
+
+          button
+
+            .classList
+
+            .remove(
+
+              "selected"
+
+            );
+
+        }
+
+      }
+
+    );
+
+}
+
+document
+
+  .querySelectorAll(
+
+    ".reaction-button"
+
+  )
+
+  .forEach(
+
+    function(button) {
+
+      button.addEventListener(
+
+        "click",
+
+        function() {
+
+          saveReaction(
+
+            button.dataset.reaction
+
+          );
+
+        }
+
+      );
+
+    }
+
+  );
+
+/* 写真プレビュー */
+
+photoInput.addEventListener(
+
+  "change",
+
+  function() {
+
+    const file =
+
+      photoInput.files[0];
+
+    if (!file) {
+
+      preview.style.display =
+
+        "none";
+
+      previewTitle.style.display =
+
+        "none";
+
+      preview
+
+        .removeAttribute(
+
+          "src"
+
+        );
+
+      return;
+
+    }
+
+    preview.src =
+
+      URL.createObjectURL(
+
+        file
+
+      );
+
+    preview.style.display =
+
+      "block";
+
+    previewTitle.style.display =
+
+      "block";
+
+  }
+
+);
+
+/* 届ける */
+
+sendButton.addEventListener(
+
+  "click",
+
+  async function() {
+
+    const message =
+
+      messageInput
+
+        .value
+
+        .trim();
+
+    const file =
+
+      photoInput.files[0];
+
+    if (!message && !file) {
+
+      status.textContent =
+
+        "メッセージか写真を選んでね 💭";
+
+      return;
+
+    }
+
+    sendButton.disabled =
+
+      true;
+
+    status.textContent =
+
+      "届けています… 💌";
+
+    let photoUrl =
+
+      null;
+
+    try {
+
+      if (file) {
+
+        const extension =
+
+          file.name.includes(".")
+
+            ? file.name
+
+                .split(".")
+
+                .pop()
+
+            : "jpg";
+
+        const fileName =
+
+          SEND_AS +
+
+          "_" +
+
+          Date.now() +
+
+          "." +
+
+          extension;
+
+        const photoResponse =
+
+          await fetch(
+
+            STORAGE_URL +
+
+            "/object/" +
+
+            BUCKET +
+
+            "/" +
+
+            fileName,
+
+            {
+
+              method:
+
+                "POST",
+
+              headers: {
+
+                "apikey":
+
+                  SUPABASE_KEY,
+
+                "Authorization":
+
+                  "Bearer " +
+
+                  SUPABASE_KEY,
+
+                "Content-Type":
+
+                  file.type ||
+
+                  "image/jpeg",
+
+                "x-upsert":
+
+                  "false"
+
+              },
+
+              body:
+
+                file
+
+            }
+
+          );
+
+        if (!photoResponse.ok) {
+
+          throw new Error(
+
+            "写真送信失敗: " +
+
+            await photoResponse.text()
+
+          );
+
+        }
+
+        photoUrl =
+
+          STORAGE_URL +
+
+          "/object/public/" +
+
+          BUCKET +
+
+          "/" +
+
+          encodeURIComponent(
+
+            fileName
+
+          );
+
+      }
+
+      const messageResponse =
+
+        await fetch(
+
+          REST_URL +
+
+          "/messages",
+
+          {
+
+            method:
+
+              "POST",
+
+            headers: {
+
+              "apikey":
+
+                SUPABASE_KEY,
+
+              "Authorization":
+
+                "Bearer " +
+
+                SUPABASE_KEY,
+
+              "Content-Type":
+
+                "application/json",
+
+              "Prefer":
+
+                "return=minimal"
+
+            },
+
+            body:
+
+              JSON.stringify(
+
+                {
+
+                  message:
+
+                    message ||
+
+                    "",
+
+                  photo_url:
+
+                    photoUrl,
+
+                  viewed_at:
+
+                    null,
+
+                  reaction:
+
+                    null,
+
+                  sender:
+
+                    SEND_AS
+
+                }
+
+              )
+
+          }
+
+        );
+
+      if (!messageResponse.ok) {
+
+        throw new Error(
+
+          "メッセージ送信失敗: " +
+
+          await messageResponse.text()
+
+        );
+
+      }
+
+      status.textContent =
+
+        "届きました 💌♡";
+
+      messageInput.value =
+
+        "";
+
+      photoInput.value =
+
+        "";
+
+      preview.style.display =
+
+        "none";
+
+      previewTitle.style.display =
+
+        "none";
+
+      preview
+
+        .removeAttribute(
+
+          "src"
+
+        );
+
+      await loadHistory();
+
+      setTimeout(
+
+        function() {
+
+          status.textContent =
+
+            "";
+
+        },
+
+        1800
+
+      );
+
+    } catch (error) {
+
+      console.error(
+
+        error
+
+      );
+
+      status.textContent =
+
+        "エラー：" +
+
+        error.message;
+
+    } finally {
+
+      sendButton.disabled =
+
+        false;
+
+    }
+
+  }
+
+);
+
+/* 履歴 */
+
+async function loadHistory() {
+
+  try {
+
+    const response =
+
+      await fetch(
+
+        REST_URL +
+
+        "/messages" +
+
+        "?select=id,message,photo_url,created_at,viewed_at,reaction,sender" +
+
+        "&sender=eq." +
+
+        encodeURIComponent(
+
+          SEND_AS
+
+        ) +
+
+        "&order=id.desc" +
+
+        "&limit=50",
+
+        {
+
+          headers: {
+
+            "apikey":
+
+              SUPABASE_KEY,
+
+            "Authorization":
+
+              "Bearer " +
+
+              SUPABASE_KEY
+
+          }
+
+        }
+
+      );
+
+    if (!response.ok) {
+
+      throw new Error(
+
+        await response.text()
+
+      );
+
+    }
+
+    const posts =
+
+      await response.json();
+
+    historyList.innerHTML =
+
+      "";
+
+    if (posts.length === 0) {
+
+      const empty =
+
+        document.createElement(
+
+          "div"
+
+        );
+
+      empty.className =
+
+        "empty-history";
+
+      empty.textContent =
+
+        "まだ届けたものはありません 💭";
+
+      historyList.appendChild(
+
+        empty
+
+      );
+
+      return;
+
+    }
+
+    posts.forEach(
+
+      function(post) {
+
+        const item =
+
+          document.createElement(
+
+            "div"
+
+          );
+
+        item.className =
+
+          "history-item";
+
+        if (post.message) {
+
+          const message =
+
+            document.createElement(
+
+              "div"
+
+            );
+
+          message.className =
+
+            "history-message";
+
+          message.textContent =
+
+            post.message;
+
+          item.appendChild(
+
+            message
+
+          );
+
+        }
+
+        if (post.photo_url) {
+
+          const img =
+
+            document.createElement(
+
+              "img"
+
+            );
+
+          img.className =
+
+            "history-photo";
+
+          img.src =
+
+            post.photo_url;
+
+          img.alt =
+
+            "history photo";
+
+          item.appendChild(
+
+            img
+
+          );
+
+        }
+
+        const date =
+
+          new Date(
+
+            post.created_at
+
+          );
+
+        const dateText =
+
+          document.createElement(
+
+            "div"
+
+          );
+
+        dateText.className =
+
+          "history-date";
+
+        dateText.textContent =
+
+          "送信：" +
+
+          date.toLocaleString(
+
+            "ja-JP",
+
+            {
+
+              year: "numeric",
+
+              month: "long",
+
+              day: "numeric",
+
+              hour: "2-digit",
+
+              minute: "2-digit"
+
+            }
+
+          );
+
+        item.appendChild(
+
+          dateText
+
+        );
+
+        const viewed =
+
+          document.createElement(
+
+            "div"
+
+          );
+
+        viewed.className =
+
+          "history-viewed";
+
+        if (post.viewed_at) {
+
+          const viewedDate =
+
+            new Date(
+
+              post.viewed_at
+
+            );
+
+          viewed.textContent =
+
+            "見てくれた ✓ " +
+
+            viewedDate.toLocaleString(
+
+              "ja-JP",
+
+              {
+
+                month: "long",
+
+                day: "numeric",
+
+                hour: "2-digit",
+
+                minute: "2-digit"
+
+              }
+
+            );
+
+        } else {
+
+          viewed.textContent =
+
+            "まだ見ていません";
+
+        }
+
+        item.appendChild(
+
+          viewed
+
+        );
+
+        const reaction =
+
+          document.createElement(
+
+            "div"
+
+          );
+
+        reaction.className =
+
+          "history-reaction";
+
+        if (post.reaction) {
+
+          reaction.textContent =
+
+            "リアクション：" +
+
+            post.reaction;
+
+        } else {
+
+          reaction.textContent =
+
+            "リアクションはまだありません";
+
+        }
+
+        item.appendChild(
+
+          reaction
+
+        );
+
+        historyList.appendChild(
+
+          item
+
+        );
+
+      }
+
+    );
+
+  } catch (error) {
+
+    console.error(
+
+      error
+
+    );
+
+    historyList.textContent =
+
+      "履歴を読み込めませんでした 🥲";
+
+  }
+
+}
+
+/* 最初に読み込み */
+
+loadLatestReceived();
+
+loadHistory();
+
+/* 5秒ごと更新 */
+
+setInterval(
+
+  function() {
+
+    loadLatestReceived();
+
+    loadHistory();
+
+  },
+
+  5000
+
+);
+
+</script>
+
+</body>
+
+</html>
